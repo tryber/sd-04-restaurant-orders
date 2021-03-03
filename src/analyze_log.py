@@ -45,11 +45,19 @@ def analyze_log(path_to_file):
             # pegar o mais pedido
             if count_orders[order[1]] > count_orders[most_requested]:
                 most_requested = count_orders[1]
-    print("Maria_Orders:", most_requested)
+    print("\nMaria_Most_Requested:", most_requested)
 
     # 2. Quantas vezes 'arnaldo' pediu 'hamburguer'?
+    count_burguers = 0
+    for order in orders_list:
+        if order[0] == "arnaldo":
+            if order[1] == "hamburguer":
+                count_burguers += 1
+    print("\nArnaldo_hamburguers:", count_burguers)
+
     # 3. Quais pratos 'joao' nunca pediu?
     # 4. Quais dias 'joao' nunca foi na lanchonete?
     # Cria um arquivo data/mkt_campaign.txt com a análise
     with open("data/mkt_campaign.txt ", "w") as log:
         log.write(f"{most_requested}\n")
+        log.write(f"{count_burguers}\n")
