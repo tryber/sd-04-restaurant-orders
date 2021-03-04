@@ -52,7 +52,30 @@ class TrackOrders:
         return never_visited
 
     def get_busiest_day(self):
-        pass
+        count_days = {}
+        busiest_day = self.orders_list[0][2]
+        for order in self.orders_list:
+            if order[2] not in count_days:
+                count_days[order[2]] = 1
+            else:
+                count_days[order[2]] += 1
+
+            if count_days[order[2]] > count_days[busiest_day]:
+                busiest_day = count_days[order[2]]
+
+        return busiest_day
 
     def get_least_busy_day(self):
+        # count_days = {}
+        # least_busy_day = self.orders_list[0][2]
+        # for order in self.orders_list:
+        #     if order[2] not in count_days:
+        #         count_days[order[2]] = 1
+        #     else:
+        #         count_days[order[2]] += 1
+
+        #     if count_days[order[2]] < count_days[least_busy_day]:
+        #         least_busy_day = count_days[order[2]]
+
+        # return least_busy_day
         pass
