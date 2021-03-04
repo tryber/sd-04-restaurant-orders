@@ -8,7 +8,6 @@ class TrackOrders:
     def add_new_order(self, costumer, order, day):
         self.orders_list.append([costumer, order, day])
 
-    # Prato mais pedido por cliente
     def get_most_ordered_dish_per_costumer(self, costumer):
         count_orders = {}
         most_requested = self.orders_list[0][1]
@@ -22,8 +21,8 @@ class TrackOrders:
 
                 # pegar o mais pedido
                 if count_orders[order[1]] > count_orders[most_requested]:
-                    most_requested = count_orders[order[1]]
-        print("MOST_REQUESTED:", most_requested)
+                    most_requested = order[1]
+
         return most_requested
 
     def get_order_frequency_per_costumer(self, costumer, order):
