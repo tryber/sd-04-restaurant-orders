@@ -56,8 +56,18 @@ def analyze_log(path_to_file):
     print("\nArnaldo_hamburguers:", count_burguers)
 
     # 3. Quais pratos 'joao' nunca pediu?
+    joao_orders = set()
+    foods = set()
+    for order in orders_list:
+        foods.add(order[1])
+        if order[0] == "joao":
+            joao_orders.add(order[1])
+    joao_never_asked = foods.difference(joao_orders)
+    print("\nJoao_orders:", joao_never_asked)
+
     # 4. Quais dias 'joao' nunca foi na lanchonete?
     # Cria um arquivo data/mkt_campaign.txt com a análise
     with open("data/mkt_campaign.txt ", "w") as log:
         log.write(f"{most_requested}\n")
         log.write(f"{count_burguers}\n")
+        log.write(f"{joao_never_asked}\n")
