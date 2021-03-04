@@ -30,7 +30,7 @@ def most_requested_by_client(orders_list, client):
 
             # pegar o mais pedido
             if count_orders[order[1]] > count_orders[most_requested]:
-                most_requested = count_orders[1]
+                most_requested = count_orders[order[1]]
 
     return most_requested
 
@@ -53,7 +53,7 @@ def never_done(orders_list, client, food_or_day):
 
     for order in orders_list:
         super_set.add(order[food_or_day])
-        if order[0] == "joao":
+        if order[0] == client:
             sub_set.add(order[food_or_day])
 
     client_never_done = super_set.difference(sub_set)
