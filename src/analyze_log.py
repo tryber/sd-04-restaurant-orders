@@ -11,7 +11,7 @@ def read_file_csv(path_to_file):
     # lança erro caso arquivo seja inexistente
     # lança erro caso não seja .csv
     except FileExistsError:
-        raise ValueError("No such file or directory: '{path_to_file}'")
+        raise ValueError(f"No such file or directory: '{path_to_file}'")
 
     return orders_list
 
@@ -80,7 +80,7 @@ def analyze_log(path_to_file):
     joao_never_went = never_done(orders_list, "joao", 2)
 
     # Cria um arquivo data/mkt_campaign.txt com a análise
-    with open("data/mkt_campaign.txt ", "w") as log:
+    with open("data/mkt_campaign.txt", "w") as log:
         log.write(f"{most_requested_by_maria}\n")
         log.write(f"{arnaldo_ask_hamburguer}\n")
         log.write(f"{joao_never_asked}\n")
