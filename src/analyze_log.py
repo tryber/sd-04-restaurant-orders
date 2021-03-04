@@ -53,7 +53,9 @@ class TrackOrders:
 
 def analyze_log(path_to_file):
     if not path_to_file.endswith(".csv"):
-        raise ValueError("Invalid file extension")
+        raise FileNotFoundError(
+            "No such file or directory: " f"'{path_to_file}'"
+        )
 
     orders = list()
 
@@ -64,7 +66,7 @@ def analyze_log(path_to_file):
 
         file.close()
 
-    with open("data/mkt_campaign.txt", "a") as result_file:
+    with open("data/mkt_campaign.txt", "w") as result_file:
         maria_orders = TrackOrders(orders, "maria")
         arnaldo_orders = TrackOrders(orders, "arnaldo")
         joao_orders = TrackOrders(orders, "joao")
