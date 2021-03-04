@@ -1,10 +1,4 @@
 import csv
-"""
-Dados
-    O atual sistema guarda os logs de todos os pedidos feitos em um arquivo csv, contendo o formato cliente, pedido, dia, um por linha e sem nome das colunas (a primeira linha já é um pedido).
-
-    O log a ser utilizado é o arquivo data/orders_1.csv. Todas as informações são strings com letras minúsculas. O histórico contém pedidos feitos em todos os dias da semana e de todos os pratos que a lanchonete oferece. Ou seja, é possível saber o cardápio completo. Os dias da semana estão no formato "...-feira", "sabado" ou "domingo".
-"""
 
 
 def read_file_csv(path_to_file):
@@ -13,8 +7,7 @@ def read_file_csv(path_to_file):
         with open(path_to_file) as path_csv:
             reader_csv = csv.reader(path_csv, delimiter=",", quotechar='"')
             orders_list = list(reader_csv)
-            print("ORDERS:", orders_list)
-            # return orders_list
+
     # lança erro caso arquivo seja inexistente
     # lança erro caso não seja .csv
     except FileExistsError:
@@ -23,16 +16,9 @@ def read_file_csv(path_to_file):
     return orders_list
 
 
-def analyze_log(path_to_file):
-    orders_list = read_file_csv(path_to_file)
-
-    # A análise deve conter:
-    # cliente, pedido, dia
-    # 1. Qual o prato mais pedido por 'maria'?
-    client = 'maria'
+def most_requested_by_client(orders_list, client):
     count_orders = {}
     most_requested = orders_list[0][1]
-
     for order in orders_list:
         # checa cliente
         if order[0] == client:
@@ -45,38 +31,57 @@ def analyze_log(path_to_file):
             # pegar o mais pedido
             if count_orders[order[1]] > count_orders[most_requested]:
                 most_requested = count_orders[1]
-    print("\nMaria_Most_Requested:", most_requested)
 
-    # 2. Quantas vezes 'arnaldo' pediu 'hamburguer'?
+    return most_requested
+
+
+def count_asked_food(orders_list, client, food):
     count_burguers = 0
     for order in orders_list:
-        if order[0] == "arnaldo":
-            if order[1] == "hamburguer":
+        if order[0] == client:
+            if order[1] == food:
                 count_burguers += 1
-    print("\nArnaldo_hamburguers:", count_burguers)
+
+    return count_burguers
+
+
+def never_done(orders_list, client, food_or_day):
+    # Superconjunto
+    super_set = set()
+    # subconjunto
+    sub_set = set()
+
+    for order in orders_list:
+        super_set.add(order[food_or_day])
+        if order[0] == "joao":
+            sub_set.add(order[food_or_day])
+
+    client_never_done = super_set.difference(sub_set)
+    return client_never_done
+
+
+def analyze_log(path_to_file):
+    orders_list = read_file_csv(path_to_file)
+
+    # A análise deve conter:
+    # cliente, pedido, dia
+    # 1. Qual o prato mais pedido por 'maria'?
+    most_requested_by_maria = most_requested_by_client(orders_list, "maria")
+
+    # 2. Quantas vezes 'arnaldo' pediu 'hamburguer'?
+    arnaldo_ask_hamburguer = count_asked_food(
+        orders_list, "arnaldo", "hamburguer"
+    )
 
     # 3. Quais pratos 'joao' nunca pediu?
-    joao_orders = set()
-    foods = set()
-    for order in orders_list:
-        foods.add(order[1])
-        if order[0] == "joao":
-            joao_orders.add(order[1])
-    joao_never_asked = foods.difference(joao_orders)
-    print("\nJoao_Never_Asked:", joao_never_asked)
+    joao_never_asked = never_done(orders_list, "joao", 1)
 
     # 4. Quais dias 'joao' nunca foi na lanchonete?
-    joao_days = set()
-    days = set()
-    for order in orders_list:
-        days.add(order[2])
-        if order[0] == "joao":
-            joao_days.add(order[2])
-    joao_never_went = days.difference(joao_days)
-    print("\nJoao_Never_Went:", joao_never_went)
+    joao_never_went = never_done(orders_list, "joao", 2)
+
     # Cria um arquivo data/mkt_campaign.txt com a análise
     with open("data/mkt_campaign.txt ", "w") as log:
-        log.write(f"{most_requested}\n")
-        log.write(f"{count_burguers}\n")
+        log.write(f"{most_requested_by_maria}\n")
+        log.write(f"{arnaldo_ask_hamburguer}\n")
         log.write(f"{joao_never_asked}\n")
         log.write(f"{joao_never_went}\n")
