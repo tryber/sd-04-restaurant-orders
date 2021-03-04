@@ -8,26 +8,32 @@ class TrackOrders:
     def add_new_order(self, costumer, order, day):
         self.orders_list.append([costumer, order, day])
 
+    # Prato mais pedido por cliente
     def get_most_ordered_dish_per_costumer(self, costumer):
-        # count_orders = {}
-        # most_requested = self.orders_list[0][1]
-        # for order in self.orders_list:
-        #     if order[0] == costumer:
-        #         # conta pedido
-        #         if order[1] not in count_orders:
-        #             count_orders[order[1]] = 1
-        #         else:
-        #             count_orders[order[1]] += 1
+        count_orders = {}
+        most_requested = self.orders_list[0][1]
+        for order in self.orders_list:
+            if order[0] == costumer:
+                # conta pedido
+                if order[1] not in count_orders:
+                    count_orders[order[1]] = 1
+                else:
+                    count_orders[order[1]] += 1
 
-        #         # pegar o mais pedido
-        #         if count_orders[order[1]] > count_orders[most_requested]:
-        #             most_requested = count_orders[order[1]]
-
-        # return most_requested
-        pass
+                # pegar o mais pedido
+                if count_orders[order[1]] > count_orders[most_requested]:
+                    most_requested = count_orders[order[1]]
+        print("MOST_REQUESTED:", most_requested)
+        return most_requested
 
     def get_order_frequency_per_costumer(self, costumer, order):
-        pass
+        count_order = 0
+        for request in self.orders_list:
+            if request[0] == costumer:
+                if request[1] == order:
+                    count_order += 1
+
+        return count_order
 
     def never_done(self, client, food_or_day):
         # Superconjunto
@@ -66,16 +72,16 @@ class TrackOrders:
         return busiest_day
 
     def get_least_busy_day(self):
-        # count_days = {}
-        # least_busy_day = self.orders_list[0][2]
-        # for order in self.orders_list:
-        #     if order[2] not in count_days:
-        #         count_days[order[2]] = 1
-        #     else:
-        #         count_days[order[2]] += 1
+        count_days = {}
+        least_busy_day = self.orders_list[0][2]
 
-        #     if count_days[order[2]] < count_days[least_busy_day]:
-        #         least_busy_day = count_days[order[2]]
+        for order in self.orders_list:
+            if order[2] not in count_days:
+                count_days[order[2]] = 1
+            else:
+                count_days[order[2]] += 1
 
-        # return least_busy_day
-        pass
+            if count_days[order[2]] <= count_days[least_busy_day]:
+                least_busy_day = order[2]
+
+        return least_busy_day
