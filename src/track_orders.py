@@ -65,3 +65,17 @@ class TrackOrders:
 
     def get_least_busy_day(self):
         pass
+
+
+if __name__ == "__main__":
+    tracker = TrackOrders()
+    print(tracker.__len__())
+    tracker.add_new_order("ana", "pizza", "domingo")
+    tracker.add_new_order("maria", "sopa", "segunda-feira")
+    tracker.add_new_order("joao", "sopa", "segunda-feira")
+    print(tracker.get_most_ordered_dish_per_costumer("ana"))
+    print(tracker.get_order_frequency_per_costumer("ana", "pizza"))
+    print(tracker.get_never_ordered_per_costumer("ana"))
+    print(tracker.get_days_never_visited_per_costumer("ana"))
+    print(tracker.get_busiest_day())
+    print(tracker.get_least_busy_day())
