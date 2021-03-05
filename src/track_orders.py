@@ -9,7 +9,23 @@ class TrackOrders:
         self.orders.append([costumer, order, day])
 
     def get_most_ordered_dish_per_costumer(self, costumer):
-        pass
+        most_requery = ""
+        orders = {}
+
+        for name, order, day in self.orders:
+            if name == costumer:
+                if order not in orders:
+                    orders[order] = 1
+                else:
+                    orders[order] += 1
+
+                if (
+                    most_requery not in orders
+                    or orders[order] > orders[most_requery]
+                ):
+                    most_requery = order
+
+        return most_requery
 
     def get_order_frequency_per_costumer(self, costumer, order):
         pass
