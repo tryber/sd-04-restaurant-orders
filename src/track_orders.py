@@ -49,7 +49,16 @@ class TrackOrders:
         return recipes.difference(costumer_recipes)
 
     def get_days_never_visited_per_costumer(self, costumer):
-        pass
+        days_on = set()
+        days_with_people = set()
+
+        for name, order, day in self.orders:
+            days_on.add(day)
+
+            if name == costumer:
+                days_with_people.add(day)
+
+        return days_on.difference(days_with_people)
 
     def get_busiest_day(self):
         pass
