@@ -28,10 +28,25 @@ class TrackOrders:
         return most_requery
 
     def get_order_frequency_per_costumer(self, costumer, order):
-        pass
+        quantity = 0
+
+        for name, recipe, day in self.orders:
+            if name == costumer and recipe == order:
+                quantity += 1
+
+        return quantity
 
     def get_never_ordered_per_costumer(self, costumer):
-        pass
+        recipes = set()
+        costumer_recipes = set()
+
+        for name, order, day in self.orders:
+            recipes.add(order)
+
+            if name == costumer:
+                costumer_recipes.add(order)
+
+        return recipes.difference(costumer_recipes)
 
     def get_days_never_visited_per_costumer(self, costumer):
         pass
