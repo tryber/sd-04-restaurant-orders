@@ -12,6 +12,7 @@ class TrackOrders:
         return len(self.orders)
 
     def add_new_order(self, costumer, order, day):
+        print(f"{costumer}  {order}  {day}")
         self.orders[costumer].add(order, day)
         self.all_dishes[order] += 1
         self.all_weekdays[day] += 1

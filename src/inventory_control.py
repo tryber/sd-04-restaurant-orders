@@ -23,12 +23,14 @@ class InventoryControl:
             'presunto': 0,
             'massa': 0,
             'frango': 0,
-        } # hardcoded? sim, culpe o avaliador :V
+        }  # hardcoded? sim, culpe o avaliador :V
 
     def add_new_order(self, costumer, order, day):
+        print(f"{costumer}  {order}  {day} Control")
         if order not in self.get_available_dishes():
+            print('false')
             return False
-  
+
         for ingredient in self.ingredients[order]:
             self.inventory[ingredient] += 1
 
@@ -39,9 +41,9 @@ class InventoryControl:
         available_dishes = set(self.ingredients.keys())
         for dish, ingredients in self.ingredients.items():
             for ingredient in ingredients:
-                if self.minimum_inventory[ingredient] <= self.inventory[ingredient]:
+                minimun = self.minimum_inventory[ingredient]
+                if minimun <= self.inventory[ingredient]:
                     available_dishes.remove(dish)
                     break
 
         return available_dishes
-
