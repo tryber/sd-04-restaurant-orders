@@ -1,64 +1,31 @@
+from src.track_orders import TrackOrders
 import csv
-from collections import defaultdict, Counter
 
 
-class Order:
-    def __init__(self):
-        self.dishes = Counter()
-        self.weekdays = Counter()
-
-    def add(self, dish, weekday):
-        self.dishes[dish] += 1
-        self.weekdays[weekday] += 1
-
-
-class TxtWriter:
-    def __init__(self, lines):
-        self.lines = [TxtWriter.add_sufix(line) for line in lines]
-
-    @staticmethod
-    def add_sufix(txt):
-        if not isinstance(txt, str):
-            txt = str(txt)
-        return txt + ";\n"
-
-    def save_file(self, path):
-        with open(path, "w", encoding="utf-8") as file:
-            file.writelines(self.lines)
-
-
-def extract_restaurant_info(path_to_file):
+def track_restaurant_orders(path_to_file):
     if not path_to_file.endswith(".csv"):
-        raise FileNotFoundError(f"No such file or directory: {path_to_file}")
+        raise FileNotFoundError(f"No such file or directory: '{path_to_file}'")
 
     with open(path_to_file, encoding="utf-8") as file:
         data = list(csv.reader(file))
 
-    orders = defaultdict(Order)
-    info = defaultdict(set)
+    tracker = TrackOrders()
 
     for name, dish, weekday in data:
-        orders[name].add(dish, weekday)
-        info["all_dishes"].add(dish)
-        info["all_weekdays"].add(weekday)
+        tracker.add_new_order(name, dish, weekday)
 
-    return [orders, info]
+    return tracker
 
 
 def analyze_log(path_to_file):
-    orders, info = extract_restaurant_info(path_to_file)
+    track = track_restaurant_orders(path_to_file)
+    lines = [
+        track.get_most_ordered_dish_per_costumer("maria"),
+        track.get_order_frequency_per_costumer("arnaldo", "hamburguer"),
+        track.get_never_ordered_per_costumer("joao"),
+        track.get_days_never_visited_per_costumer("joao")
+    ]
 
-    joao_dishes = set(orders["joao"].dishes.keys())
-    joao_weekdays = set(orders["joao"].weekdays.keys())
-
-    writer = TxtWriter([
-            orders['maria'].dishes.most_common(1)[0][0],
-            orders["arnaldo"].dishes["hamburguer"],
-            info["all_dishes"] - joao_dishes,
-            info["all_weekdays"] - joao_weekdays,
-    ])
-    writer.save_file('data/mkt_campaign.txt')
-
-
-
-analyze_log("./data/orders_1.csv")
+    with open('data/mkt_campaign.txt', "w", encoding="utf-8") as file:
+        for line in lines:
+            file.write(f"{line}\n")
