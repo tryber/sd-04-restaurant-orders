@@ -1,6 +1,7 @@
 import csv
 from src.track_orders import TrackOrders
 
+
 def analyze_log(path_to_file):
 
     if not path_to_file.endswith(".csv"):
