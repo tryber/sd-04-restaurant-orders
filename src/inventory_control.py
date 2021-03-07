@@ -1,4 +1,5 @@
 class InventoryControl:
+
     def __init__(self):
         self.ingredients = {
             'hamburguer': ['pao', 'carne', 'queijo'],
