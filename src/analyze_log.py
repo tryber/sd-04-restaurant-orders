@@ -15,7 +15,7 @@ def most_ordered_by_person(orders, person):
     return most_ordered
 
 
-def frequency_by_person_product(orders, person, product):
+def freq_by_person_product(orders, person, product):
     quantity = 0
     for order in orders[person]:
         if order["product"] == product:
@@ -59,7 +59,7 @@ def analyze_log(path_to_file):
             result_file.write(f"{most_ordered_by_person(orders, 'maria')}\n")
 
             result_file.write(
-                f"{frequency_by_person_product(orders, 'arnaldo', 'hamburguer')}\n"
+                f"{freq_by_person_product(orders, 'arnaldo', 'hamburguer')}\n"
             )
 
             result_file.write(
