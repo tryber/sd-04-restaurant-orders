@@ -5,9 +5,10 @@ def read_the_file(path):
     data = []
     with open(path, encoding="utf-8") as csvfile:
         data_raw = csv.DictReader(csvfile,
-        fieldnames = ['name', 'food', 'weekday'])
+                                  fieldnames=['name', 'food', 'weekday'])
         for row in data_raw:
-            data.append({'name': row['name'], 'food': row['food'], 'weekday': row['weekday']})
+            data.append({'name': row['name'],
+                        'food': row['food'], 'weekday': row['weekday']})
         return data
 
 
@@ -18,7 +19,7 @@ def extract_from_orders(orders, data):
     return list_to_extract
 
 
-def count_customer_habits_set (customer_name, habit, habits_list, orders):
+def count_customer_habits_set(customer_name, habit, habits_list, orders):
     customer = set()
     for order in orders:
         if order['name'] == customer_name:
@@ -26,7 +27,7 @@ def count_customer_habits_set (customer_name, habit, habits_list, orders):
     return customer
 
 
-def count_customer_habits (customer_name, habit, habits_list, orders):
+def count_customer_habits(customer_name, habit, habits_list, orders):
     customer = {}
     for one_habit in habits_list:
         customer[one_habit] = 0
@@ -43,9 +44,9 @@ def analyze_log(path_to_file):
     orders = read_the_file(path_to_file)
     weekday = extract_from_orders(orders, 'weekday')
     foods = extract_from_orders(orders, 'food')
-    maria_food = count_customer_habits ("maria", 'food', foods, orders)
-    joao_food = count_customer_habits_set ("joao", 'food', foods, orders)
-    joao_day = count_customer_habits_set ("joao", 'weekday', weekday, orders)
+    maria_food = count_customer_habits("maria", 'food', foods, orders)
+    joao_food = count_customer_habits_set("joao", 'food', foods, orders)
+    joao_day = count_customer_habits_set("joao", 'weekday', weekday, orders)
     for order in orders:
         if order['name'] == 'arnaldo' and order['food'] == 'hamburguer':
             arnaldo_hamburger_ordered += 1
