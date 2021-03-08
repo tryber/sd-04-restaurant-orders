@@ -3,12 +3,14 @@ import csv
 
 def csv_file_reader(path_to_file):
     try:
-        with open(path_to_file) as path_csv:
-            reader_csv = csv.reader(path_csv, delimiter=",", quotechar='"')
-            orders_list = list(reader_csv)
+        with open(path_to_file) as csv_file:
+            orders_reader = csv.reader(csv_file, delimiter=",")
+            orders_list = list(orders_reader)
 
     except FileExistsError:
-        raise ValueError(f"No such file or directory: '{path_to_file}'")
+        raise ValueError(
+            "No such file or directory: " f"'{path_to_file}'"
+        )
 
     return orders_list
 
@@ -56,7 +58,7 @@ def do_not_have_order(orders_list, client, dish):
     return dont_have_order
 
 
-def analyse_log(path_to_file):
+def analyze_log(path_to_file):
     orders_list = csv_file_reader(path_to_file)
 
     # 1. Qual o prato mais pedido por 'maria'?
