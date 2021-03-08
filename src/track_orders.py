@@ -1,5 +1,7 @@
 
 from src.analyze_log import count_customer_habits
+from src.analyze_log import count_customer_habits_set
+
 
 class TrackOrders:
     def __init__(self):
@@ -18,10 +20,10 @@ class TrackOrders:
         pass
 
     def get_never_ordered_per_costumer(self, costumer):
-        pass
+        return count_customer_habits_set(costumer, 'food', self.orders)
 
     def get_days_never_visited_per_costumer(self, costumer):
-        pass
+        return count_customer_habits_set(costumer, 'weekday', self.orders)
 
     def get_busiest_day(self):
         pass
