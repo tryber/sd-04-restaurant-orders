@@ -55,8 +55,6 @@ def analyze_log(path_to_file):
     arnaldo_hamburger_ordered = 0
     file_readd = read_the_file(path_to_file)
     orders = file_to_dic(file_readd)
-    weekday = extract_from_orders(orders, 'weekday')
-    foods = extract_from_orders(orders, 'food')
     max_ordered = count_customer_habits("maria", 'food', file_readd)
     joao_food = count_customer_habits_set("joao", 'food', file_readd)
     joao_day = count_customer_habits_set("joao", 'weekday', file_readd)
