@@ -1,11 +1,11 @@
 import csv
 
+
 def read_the_file(path):
     data = []
     with open(path, encoding="utf-8") as csvfile:
         data_raw = csv.DictReader(csvfile,
         fieldnames = ['name', 'food', 'weekday'])
-
         for row in data_raw:
             data.append({'name': row['name'], 'food': row['food'], 'weekday': row['weekday']})
         return data
@@ -18,15 +18,21 @@ def extract_from_orders(orders, data):
     return list_to_extract
 
 
+def count_customer_habits_set (customer_name, habit, habits_list, orders):
+    customer = set()
+    for order in orders:
+        if order['name'] == customer_name:
+            customer.add(order[habit])
+    return customer
+
+
 def count_customer_habits (customer_name, habit, habits_list, orders):
     customer = {}
     for one_habit in habits_list:
         customer[one_habit] = 0
-    print("customer", customer)
     for order in orders:
         if order['name'] == customer_name:
             customer[order[habit]] += 1
-            customer['hamburguer'] += 1
     return customer
 
 
@@ -46,17 +52,14 @@ def analyze_log(path_to_file):
     orders = read_the_file(path_to_file)
     weekday = extract_from_orders(orders, 'weekday')
     foods = extract_from_orders(orders, 'food')
-    print("weekday", weekday, foods)
-
-    # for food in foods:
-    #     maria_food[food] = 0
-
-    # for order in orders:
-    #     if order['name'] == 'maria':
-    #         maria_food[order['food']] += 1
-
     maria_food = count_customer_habits ("maria", 'food', foods, orders)
-    print('maria_food', maria_food)
+    joao_food = count_customer_habits_set ("joao", 'food', foods, orders)
+    joao_day = count_customer_habits_set ("joao", 'weekday', weekday, orders)
+    print('joao_food', joao_food)
+    print('joao_food', joao_day)
+
+    
+    print(weekday.difference(joao_day))
 
     #         if row['food'] not in food:
     #             food.append(row['food'])
@@ -82,13 +85,10 @@ def analyze_log(path_to_file):
     #         if joao_weekday[weekday_item] == 0:
     #             joao_weekday_not_ordered.add(weekday_item)
 
-    print("maria max ordered", max_ordered)
-    #     print("arnaldo_hamburger_ordered", arnaldo_hamburger_ordered)
-    #     print('joao_food_not_ordered', joao_food_not_ordered)
-    #     print('joao_weekday_not_ordered_list', joao_weekday_not_ordered)
+
 
     with open("data/mkt_campaign.txt", mode="w") as file:
         file.write(f"{max_ordered}\n")
     #     file.write(f"{arnaldo_hamburger_ordered}\n")
-    #     file.write(f"{joao_food_not_ordered}\n")
-    #     file.write(f"{joao_weekday_not_ordered}")
+        file.write(f"{foods.difference(joao_food)}\n")
+        file.write(f"{weekday.difference(joao_day)}")
