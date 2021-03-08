@@ -2,14 +2,13 @@ import csv
 
 
 def csv_file_reader(path_to_file):
-    if not path_to_file.endswith(".csv"):
-        raise FileNotFoundError(
-            "No such file or directory: " f"'{path_to_file}'"
-        )
+    try:
+        with open(path_to_file) as path_csv:
+            reader_csv = csv.reader(path_csv, delimiter=",", quotechar='"')
+            orders_list = list(reader_csv)
 
-    with open(path_to_file) as csv_file:
-        orders_reader = csv.reader(csv_file, delimiter=",")
-        orders_list = list(orders_reader)
+    except FileExistsError:
+        raise ValueError(f"No such file or directory: '{path_to_file}'")
 
     return orders_list
 
