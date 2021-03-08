@@ -14,7 +14,7 @@ class InventoryControl:
             'molho': 50,
             'presunto': 50,
             'massa': 50,
-            'frango': 50,
+            'frango': 500,
         }
 
     def add_new_order(self, costumer, order, day):
