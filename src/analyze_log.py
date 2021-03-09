@@ -1,5 +1,6 @@
 import csv
 
+
 def most_requested_recipe(orders, costumer):
     favorite = ""
     orders = {}
@@ -13,7 +14,7 @@ def most_requested_recipe(orders, costumer):
 
             if (
                 favorite not in orders
-                or orders[order] > orders[favorite]
+                or orders[favorite] < orders[order]
             ):
                 favorite = order
 
