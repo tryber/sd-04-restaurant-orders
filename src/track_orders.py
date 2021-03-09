@@ -47,8 +47,18 @@ class TrackOrders:
     # def get_days_never_visited_per_costumer(self, costumer):
     #     pass
 
-    # def get_busiest_day(self):
-    #     pass
+    def get_busiest_day(self):
+        if len(self.orders) == 0:
+            return None
+        days = defaultdict(int)
+        for order in self.orders:
+            days[order[2]] += 1
+        return max(days, key=days.get)
 
-    # def get_least_busy_day(self):
-    #     pass
+    def get_least_busy_day(self):
+        if len(self.orders) == 0:
+            return None
+        days = defaultdict(int)
+        for order in self.orders:
+            days[order[2]] += 1
+        return min(days, key=days.get)
