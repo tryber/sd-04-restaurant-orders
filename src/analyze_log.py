@@ -14,6 +14,7 @@ def ordered_dish_per_costumer(data, costumer):
     max_ordered = max(costumer_meals.items(), key=operator.itemgetter(1))[0]
     return max_ordered
 
+
 def analyze_log(path_to_file):
     if not path_to_file.endswith(".csv"):
         raise FileNotFoundError(f"No such file or directory: '{path_to_file}'")
@@ -24,4 +25,3 @@ def analyze_log(path_to_file):
 
     with open("data/mkt_campaign.txt", "w") as analyze_file:
         analyze_file.write(f"{ordered_dish_per_costumer(data, 'maria')}\n")
-        analyze_file.write(f"{get_unordered_meals(data, 'joao')}\n")
