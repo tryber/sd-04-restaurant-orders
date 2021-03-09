@@ -21,7 +21,7 @@ def analyze_log(path_to_file):
 
     with open(path_to_file, "r") as file:
         content = csv.reader(file, delimiter=",")
-        return data = list(content)
+        data = list(content)
 
     with open("data/mkt_campaign.txt", "w") as analyze_file:
         analyze_file.write(f"{ordered_dish_per_costumer(data, 'maria')}\n")
