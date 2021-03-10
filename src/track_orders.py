@@ -3,6 +3,7 @@ class TrackOrders:
         pass
 
     def add_new_order(self, costumer, order, day):
+        print(day)
         pass
 
     def get_most_ordered_dish_per_costumer(self, costumer):
