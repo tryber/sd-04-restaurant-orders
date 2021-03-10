@@ -45,15 +45,10 @@ class TrackOrders:
             return None
 
         visited_days = set()
-        all_days = {
-            "segunda-feira",
-            "terça-feira",
-            "quarta-feira",
-            "quinta-feira",
-            "sexta-feira",
-            "sábado",
-            "domingo"
-        }
+        all_days = set()
+
+        for order in self.orders:
+            all_days.add(order[2])
 
         for order in self.orders:
             if order[0] == costumer:
