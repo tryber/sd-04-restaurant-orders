@@ -38,5 +38,3 @@ def analyze_log(path_to_file):
             f"{dias_joao_n_foi}\n"
         )
 
-
-analyze_log("../data/orders_1.csv")
