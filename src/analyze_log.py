@@ -30,7 +30,7 @@ def analyze_log(path_to_file):
 
         print(arnaldo_ask_burguer)
 
-        txtFile = open("../data/mkt_campaign.txt", "w")
+        txtFile = open("./data/mkt_campaign.txt", "w")
         txtFile.write(
             f"{maria_pediu_mais}\n"
             f"{arnaldo_ask_burguer}\n"
