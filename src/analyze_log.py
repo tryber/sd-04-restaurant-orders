@@ -1,5 +1,4 @@
 import csv
-from os import write
 from statistics import mode
 
 
@@ -16,15 +15,14 @@ def analyze_log(path_to_file):
 
         for i, row in enumerate(data):
             list_todos_pratos.add(row["prato"])
-            list_todos_dias.add(row['dia'])
+            list_todos_dias.add(row["dia"])
             if row["nome"] == "arnaldo" and row["prato"] == "hamburguer":
                 arnaldo_ask_burguer += 1
             if row["nome"] == "maria":
                 list_pratos_maria.append(row["prato"])
             if row["nome"] == "joao":
                 list_pratos_joao.add(row["prato"])
-                list_dias_joao.add(row['dia'])
-
+                list_dias_joao.add(row["dia"])
 
         joao_nunca_comeu = set(list_todos_pratos) - set(list_pratos_joao)
         maria_pediu_mais = mode(list_pratos_maria)
@@ -34,10 +32,10 @@ def analyze_log(path_to_file):
 
         txtFile = open("../data/mkt_campaign.txt", "w")
         txtFile.write(
-            f'{maria_pediu_mais}\n'
-            f'{arnaldo_ask_burguer}\n'
-            f'{joao_nunca_comeu}\n'
-            f'{dias_joao_n_foi}\n'
+            f"{maria_pediu_mais}\n"
+            f"{arnaldo_ask_burguer}\n"
+            f"{joao_nunca_comeu}\n"
+            f"{dias_joao_n_foi}\n"
         )
 
 
