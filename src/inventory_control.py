@@ -8,13 +8,13 @@ class InventoryControl:
         }
 
         self.minimum_inventory = {
-            'pao': 50,
-            'carne': 50,
-            'queijo': 100,
-            'molho': 50,
-            'presunto': 50,
-            'massa': 50,
-            'frango': 50,
+            'pao': 0,
+            'carne': 0,
+            'queijo': 0,
+            'molho': 0,
+            'presunto': 0,
+            'massa': 0,
+            'frango': 0,
         }
 
         self.orders_list = list()
@@ -37,3 +37,14 @@ class InventoryControl:
                     ingredients_to_buy[ingredient] += 1
 
         return ingredients_to_buy
+
+    def get_available_dishes(self):
+        available_dishes = set(self.ingredients.keys())
+        for dish, ingredients in self.ingredients.items():
+            for ingredient in ingredients:
+                minimun = self.minimum_inventory[ingredient]
+                if minimun <= self.inventory[ingredient]:
+                    available_dishes.remove(dish)
+                    break
+
+        return available_dishes
