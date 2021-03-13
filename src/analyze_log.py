@@ -2,11 +2,11 @@
 '''Qual o prato mais pedido por 'maria'?'''
 
 
-def favorite_recipe(data, costumer):
+def favorite_recipe(orders, costumer):
     request_favorite = ""
     list_orders = {}
 
-    for name, order, day in data:
+    for name, order, day in orders:
         if name == costumer:
             if order not in list_orders:
                 list_orders[order] = 1
@@ -23,10 +23,10 @@ def favorite_recipe(data, costumer):
 '''Quantas vezes 'arnaldo' pediu 'hamburguer'?'''
 
 
-def qty_orders(data, costumer, recipe):
+def qty_orders(orders, costumer, recipe):
     qty = 0
 
-    for name, order, day in data:
+    for name, order, day in orders:
         if name == costumer and order == recipe:
             qty += 1
 
