@@ -1,7 +1,8 @@
-import csv
-
+'''import csv'''
 ''' Req 1 '''
 '''Qual o prato mais pedido por 'maria'?'''
+
+
 def favorite_recipe(data, costumer):
     request_favorite = ""
     list_orders = {}
@@ -20,9 +21,9 @@ def favorite_recipe(data, costumer):
                 request_favorite = order
 
     return request_favorite
-
-
 '''Quantas vezes 'arnaldo' pediu 'hamburguer'?'''
+
+
 def qty_orders(data, costumer, recipe):
     qty = 0
 
@@ -31,9 +32,9 @@ def qty_orders(data, costumer, recipe):
             qty += 1
 
     return qty
-
-
 '''Quais pratos 'joao' nunca pediu?'''
+
+
 def not_orders(order_list, client, list_of, term):
     recipes = set()
     client_recipes = set()
