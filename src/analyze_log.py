@@ -71,9 +71,7 @@ def analyze_log(path_to_file):
 
     joao_never_asked = never_done(orders_list, "joao", 1)
 
-
     joao_never_went = never_done(orders_list, "joao", 2)
-
 
     with open("data/mkt_campaign.txt", "w") as log:
         log.write(f"{most_requested_by_maria}\n")
