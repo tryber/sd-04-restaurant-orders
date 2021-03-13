@@ -20,6 +20,8 @@ def favorite_recipe(orders, costumer):
                 request_favorite = order
 
     return request_favorite
+
+
 '''Quantas vezes 'arnaldo' pediu 'hamburguer'?'''
 
 
@@ -31,6 +33,8 @@ def qty_orders(orders, costumer, recipe):
             qty += 1
 
     return qty
+
+
 '''Quais pratos 'joao' nunca pediu?'''
 
 
