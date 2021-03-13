@@ -1,8 +1,8 @@
 ''' Req 1 '''
-'''Qual o prato mais pedido por 'maria'?'''
 
 
 def favorite_recipe(orders, costumer):
+    '''Qual o prato mais pedido por 'maria'?'''
     request_favorite = ""
     list_orders = {}
 
@@ -22,10 +22,8 @@ def favorite_recipe(orders, costumer):
     return request_favorite
 
 
-'''Quantas vezes 'arnaldo' pediu 'hamburguer'?'''
-
-
 def qty_orders(orders, costumer, recipe):
+    '''Quantas vezes 'arnaldo' pediu 'hamburguer'?'''
     qty = 0
 
     for name, order, day in orders:
@@ -35,10 +33,8 @@ def qty_orders(orders, costumer, recipe):
     return qty
 
 
-'''Quais pratos 'joao' nunca pediu?'''
-
-
 def not_orders(orders, costumer):
+    '''Quais pratos 'joao' nunca pediu?'''
     recipes = set()
     client_recipes = set()
 
