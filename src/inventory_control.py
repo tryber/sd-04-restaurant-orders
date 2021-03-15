@@ -29,24 +29,22 @@ class InventoryControl:
 
     def add_new_order(self, costumer, order, day):
         self.orders.append([costumer, order, day])
+        if order not in self.get_available_dishes():
+            return False
+
+        for ing in self.ingredients[order]:
+            self.inventory[ing] += 1
 
     def get_quantities_to_buy(self):
-        for _, order, _ in self.orders:
-            if order == "hamburguer":
-                self.inventory["pao"] += 1
-                self.inventory["carne"] += 1
-                self.inventory["queijo"] += 1
-
-            elif order == "pizza":
-                self.inventory["massa"] += 1
-                self.inventory["molho"] += 1
-                self.inventory["queijo"] += 1
-
-            elif order == "misto-quente":
-                self.inventory["pao"] += 1
-                self.inventory["presunto"] += 1
-                self.inventory["queijo"] += 1
-            else:
-                self.inventory["massa"] += 1
-                self.inventory["frango"] += 1
         return self.inventory
+
+    def get_available_dishes(self):
+        available_dishes = list(self.ingredients.keys())
+        for dish, ings in self.ingredients.items():
+            for ing in ings:
+                min_ing = self.minimum_inventory[ing]
+                if min_ing <= self.inventory[ing]:
+                    available_dishes.remove(dish)
+                    break
+
+        return set(available_dishes)
