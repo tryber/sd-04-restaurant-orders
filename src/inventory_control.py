@@ -31,23 +31,22 @@ class InventoryControl:
         self.orders.append([costumer, order, day])
 
     def get_quantities_to_buy(self):
-
         for _, order, _ in self.orders:
             if order == "hamburguer":
                 self.inventory["pao"] += 1
                 self.inventory["carne"] += 1
                 self.inventory["queijo"] += 1
 
-            if order == "pizza":
+            elif order == "pizza":
                 self.inventory["massa"] += 1
                 self.inventory["molho"] += 1
                 self.inventory["queijo"] += 1
 
-            if order == "misto-quente":
+            elif order == "misto-quente":
                 self.inventory["pao"] += 1
                 self.inventory["presunto"] += 1
                 self.inventory["queijo"] += 1
-            if order == "coxinha":
+            else:
                 self.inventory["massa"] += 1
                 self.inventory["frango"] += 1
         return self.inventory
