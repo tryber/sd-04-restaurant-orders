@@ -3,7 +3,7 @@ import pytest
 
 
 def test_validar_conteudo_do_arquivo_gerado():
-    analyze_log("data/orders_1.csv")
+    analyze_log("./data/orders_1.csv")
     FILE_TXT = "data/mkt_campaign.txt"
     with open(FILE_TXT) as f:
         file_txt_file = f.readlines()
