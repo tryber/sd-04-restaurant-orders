@@ -37,4 +37,3 @@ def analyze_log(path_to_file):
             f"{joao_nunca_comeu}\n"
             f"{dias_joao_n_foi}\n"
         )
-
