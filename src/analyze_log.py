@@ -7,8 +7,8 @@ def analyze_log(path_to_file):
     # caminho csv
     file = path_to_file
 
-    if not file.endswith(".csv"):
-        raise FileNotFoundError(f"No such file or directory: {file}")
+    # if not file.endswith(".csv"):
+    #     raise FileNotFoundError(f"No such file or directory: {file}")
 
     # criando conjuntos por pessoa,
     # por tipo de comida e dia da semana
