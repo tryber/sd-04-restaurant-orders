@@ -52,7 +52,7 @@ def analyze_log(path_to_file):
     joao_day = con_day.difference(conj_joao['joao'])
 
     # criando arquivo csv
-    with open('../data/mkt_campaign.txt', 'w') as writer_csv:
+    with open('data/mkt_campaign.txt', 'w') as writer_csv:
         writer_csv = csv.writer(writer_csv, delimiter=';',
                                 lineterminator='\n\n')
         writer_csv.writerow([list(maria_count_food)[0]])
