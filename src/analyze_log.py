@@ -53,7 +53,7 @@ def analyze_log(path_to_file):
 
     # criando arquivo csv
     with open('../data/mkt_campaign.txt', 'w') as writer_csv:
-        writer_csv = csv.writer(writer_csv, delimiter=';')
+        writer_csv = csv.writer(writer_csv, delimiter=';', lineterminator='\n\n')
         writer_csv.writerow([list(maria_count_food)[0]])
         writer_csv.writerow([list(arnaldo_count_food.values())[1]])
         writer_csv.writerow([joao_food])
