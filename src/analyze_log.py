@@ -7,8 +7,8 @@ def analyze_log(path_to_file):
     # caminho csv
     file = path_to_file
 
-    if not file.endswith(".csv"):
-        raise ValueError("Formato invalido")
+    # if not file.endswith(".csv"):
+    #     raise ValueError("Formato invalido")
 
     # criando conjuntos por pessoa,
     # por tipo de comida e dia da semana
