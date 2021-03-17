@@ -12,9 +12,9 @@ def analyze_log(path_to_file):
 
     # criando conjuntos por pessoa,
     # por tipo de comida e dia da semana
-    conj_arnaldo = defaultdict(list)
+    # conj_arnaldo = defaultdict(list)
     conj_joao = defaultdict(list)
-    conj_maria = defaultdict(list)
+    conj_maria_arnaldo = defaultdict(list)
     conj_food = set()
     con_day = set()
 
@@ -26,22 +26,20 @@ def analyze_log(path_to_file):
             conj_food.add(food)
             con_day.add(day)
             # conjuntos por pessoa
-            if name == 'maria':
-                conj_maria['maria'].append(food)
+            if name == 'maria' or name == 'arnaldo':
+                conj_maria_arnaldo[name].append(food)
             if name == 'joao':
-                conj_joao['joao'].append(food)
-                conj_joao['joao'].append(day)
-            if name == 'arnaldo':
-                conj_arnaldo['arnaldo'].append(food)
+                conj_joao[name].append(food)
+                conj_joao[name].append(day)
 
     # Prato mais pedido por maria
-    maria_count_food = Counter(conj_maria['maria'])
+    maria_count_food = Counter(conj_maria_arnaldo['maria'])
     # maria_max_food = max(maria_count_food, key=maria_count_food.get)
     # teste = list(maria_count_food.keys())[0]
     # print(list(maria_count_food)[0])
 
     # Quantas vezes 'arnaldo' pediu 'hamburguer'
-    arnaldo_count_food = Counter(conj_arnaldo['arnaldo'])
+    arnaldo_count_food = Counter(conj_maria_arnaldo['arnaldo'])
     # arnaldo_qtd_hamburguer = arnaldo_count_food['hamburguer']
     # print(list(arnaldo_count_food.values())[1])
 
