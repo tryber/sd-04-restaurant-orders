@@ -3,7 +3,7 @@ import pytest
 
 
 def test_validar_conteudo_do_arquivo_gerado():
-    analyze_log("..data/orders_1.csv")
+    analyze_log("data/orders_1.csv")
     FILE_TXT = "data/mkt_campaign.txt"
     with open(FILE_TXT) as f:
         file_txt_file = f.readlines()
@@ -20,12 +20,12 @@ def test_validar_conteudo_do_arquivo_gerado():
 
 
 def test_validar_arquivo_inexistente():
-    expect_text = "No such file or directory: " "'..data/orders_3.csv'"
+    expect_text = "No such file or directory: " "'data/orders_3.csv'"
     with pytest.raises(FileNotFoundError, match=expect_text):
         assert analyze_log("data/orders_3.csv")
 
 
 def test_validar_arquivo_com_extensao_invalida():
-    expect_text = "No such file or directory: " "'..data/orders_1.txt'"
+    expect_text = "No such file or directory: " "'data/orders_1.txt'"
     with pytest.raises(FileNotFoundError, match=expect_text):
         assert analyze_log("data/orders_1.txt")
