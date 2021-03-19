@@ -19,18 +19,20 @@ class InventoryControl:
             'frango': 50,
         }
 
+    def get_ing_list(self):
+        ing_0 = set()
+        for ing in self.minimum_inventory:
+            if self.minimum_inventory[ing] == 0:
+                ing_0.add(ing)
+        return ing_0
+
     def get_available_dishes(self):
         pratos = set()
-        ing_0 = set()
-
-        for ing in self.minimum_inventory:
-            if ing == 0:
-                ing_0.add(ing)
-                print(f"ing_0000000000000000000000000000, {ing_0}")
+        list_0 = self.get_ing_list()
 
         for prato in self.ingredients:
-            for ing in self.ingredients[prato]:
-                if ing not in ing_0:
+            for ing2 in self.ingredients[prato]:
+                if ing2 not in list_0:
                     pratos.add(prato)
                 else:
                     pratos.remove(prato)
@@ -43,6 +45,9 @@ class InventoryControl:
         ingredientes = self.ingredients[order]
         for ingrediente in ingredientes:
             self.minimum_inventory[ingrediente] -= 1
+        # print(f"ooooooooooorder, {order}")
+        # if order not in self.get_available_dishes():
+        #     return False
 
     def get_quantities_to_buy(self):
         pedido = dict()
