@@ -35,12 +35,12 @@ class InventoryControl:
     def get_available_dishes(self):
         pratos = self.get_pratos()
         list_0 = self.get_ing_list()
-        print(f"tesssssste, {pratos}")
+        # print(f"tesssssste, {pratos}")
 
         for prato in self.ingredients:
             for ing2 in self.ingredients[prato]:
                 if ing2 in list_0 and prato in pratos:
-                    print(f"tesssssste, {pratos}")
+                    # print(f"tesssssste, {pratos}")
                     pratos.remove(prato)
 
         return pratos
@@ -50,10 +50,17 @@ class InventoryControl:
 
         ingredientes = self.ingredients[order]
         for ingrediente in ingredientes:
-            self.minimum_inventory[ingrediente] -= 1
-        # print(f"ooooooooooorder, {order}")
-        # if order not in self.get_available_dishes():
-        #     return False
+            if self.minimum_inventory[ingrediente] > 0:
+                self.minimum_inventory[ingrediente] -= 1
+            else:
+                return False
+
+        lista = self.get_available_dishes()
+        print(f"ooooooooooorder, {order}")
+        print(f"ingredientes, {self.minimum_inventory}")
+        print(f"lista, {lista}")
+        if order not in lista:
+            return False
 
     def get_quantities_to_buy(self):
         pedido = dict()
