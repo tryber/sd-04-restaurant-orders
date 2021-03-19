@@ -26,15 +26,21 @@ class InventoryControl:
                 ing_0.add(ing)
         return ing_0
 
-    def get_available_dishes(self):
+    def get_pratos(self):
         pratos = set()
+        for prato in self.ingredients:
+            pratos.add(prato)
+        return pratos
+
+    def get_available_dishes(self):
+        pratos = self.get_pratos()
         list_0 = self.get_ing_list()
+        print(f"tesssssste, {pratos}")
 
         for prato in self.ingredients:
             for ing2 in self.ingredients[prato]:
-                if ing2 not in list_0:
-                    pratos.add(prato)
-                else:
+                if ing2 in list_0 and prato in pratos:
+                    print(f"tesssssste, {pratos}")
                     pratos.remove(prato)
 
         return pratos
