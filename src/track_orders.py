@@ -6,6 +6,7 @@ class TrackOrders:
     def __init__(self):
         self.orders = defaultdict(list)
         self.foods = set()
+        self.days = set()
 
     def __len__(self):
         return len(self.orders)
@@ -13,6 +14,7 @@ class TrackOrders:
     def add_new_order(self, costumer, order, day):
         self.orders[costumer].append([order, day])
         self.foods.add(order)
+        self.days.add(day)
 
     def get_most_ordered_dish_per_costumer(self, costumer):
         costumer_most_ordered = Counter(self.orders[costumer][0])
@@ -28,7 +30,10 @@ class TrackOrders:
         return self.foods.difference(costumer_food)
 
     def get_days_never_visited_per_costumer(self, costumer):
-        pass
+        costumer_days = set()
+        for item in self.orders[costumer]:
+            costumer_days.add(item[1])
+        return self.days.difference(costumer_days)
 
     def get_busiest_day(self):
         pass
