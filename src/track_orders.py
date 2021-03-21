@@ -19,14 +19,14 @@ class TrackOrders:
         self.all_days.append(day)
 
     def get_most_ordered_dish_per_costumer(self, costumer):
-        costumer_most_ordered = Counter(self.orders[costumer][0])
+        costumer_most_ordered = Counter(self.orders[costumer][0])       
         return list(costumer_most_ordered.keys())[0]
 
     def get_order_frequency_per_costumer(self, costumer, order):
         qtd_order = 0
         for item in self.orders[costumer]:
             if item[0] == order:
-                qtd_order += 1            
+                qtd_order += 1
         return qtd_order
 
     def get_never_ordered_per_costumer(self, costumer):
