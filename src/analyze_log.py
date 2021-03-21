@@ -4,7 +4,7 @@ import csv
 
 
 def analyze_log(path_to_file):
-    
+
     # criando conjuntos por pessoa,
     # por tipo de comida e dia da semana
     # conj_arnaldo = defaultdict(list)
