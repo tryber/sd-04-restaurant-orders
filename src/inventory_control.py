@@ -17,7 +17,7 @@ class InventoryControl:
             'frango': 50,
         }
 
-        self.quantities_to_buy = {
+        self.quantities_inventory = {
             'pao': 0,
             'carne': 0,
             'queijo': 0,
@@ -45,22 +45,22 @@ class InventoryControl:
         elements = self.ingredients[order]
         for ingredient in elements:
             if (
-                self.quantities_to_buy[ingredient] + 1 <
+                self.quantities_inventory[ingredient] + 1 <
                 self.minimum_inventory[ingredient]
             ):
-                self.quantities_to_buy[ingredient] += 1
+                self.quantities_inventory[ingredient] += 1
             elif (
-                self.quantities_to_buy[ingredient] <
+                self.quantities_inventory[ingredient] <
                 self.minimum_inventory[ingredient]
             ):
-                self.quantities_to_buy[ingredient] += 1
+                self.quantities_inventory[ingredient] += 1
                 self.remove_dish(ingredient)
             else:
                 return False
 
     def get_quantities_to_buy(self):
         pass
-        return self.quantities_to_buy
+        return self.quantities_inventory
 
     def get_available_dishes(self):
         return self.all_dishes
