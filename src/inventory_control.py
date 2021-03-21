@@ -8,6 +8,16 @@ class InventoryControl:
         }
 
         self.minimum_inventory = {
+            'pao': 50,
+            'carne': 50,
+            'queijo': 100,
+            'molho': 50,
+            'presunto': 50,
+            'massa': 50,
+            'frango': 50,
+        }
+
+        self.quantities_to_buy = {
             'pao': 0,
             'carne': 0,
             'queijo': 0,
@@ -17,34 +27,40 @@ class InventoryControl:
             'frango': 0,
         }
 
-        self.orders_list = list()
+        self.all_dishes = set([
+            'hamburguer',
+            'pizza',
+            'misto-quente',
+            'coxinha',
+        ])
+
+    def remove_dish(self, ingredient):
+        for dish in self.ingredients:
+            actual_ingredients = set(self.ingredients[dish])
+            if ingredient in actual_ingredients:
+                self.all_dishes.discard(dish)
 
     def add_new_order(self, costumer, order, day):
-        self.orders_list.append([costumer, order, day])
+        pass
+        elements = self.ingredients[order]
+        for ingredient in elements:
+            if (
+                self.quantities_to_buy[ingredient] + 1 <
+                self.minimum_inventory[ingredient]
+            ):
+                self.quantities_to_buy[ingredient] += 1
+            elif (
+                self.quantities_to_buy[ingredient] <
+                self.minimum_inventory[ingredient]
+            ):
+                self.quantities_to_buy[ingredient] += 1
+                self.remove_dish(ingredient)
+            else:
+                return False
 
     def get_quantities_to_buy(self):
-        ingredients_to_buy = {}
-
-        for ingredient in self.minimum_inventory.keys():
-            ingredients_to_buy[ingredient] = 0
-
-        for order in self.orders_list:
-            dish = order[1]
-            for ingredient in self.ingredients[dish]:
-                if ingredient not in ingredients_to_buy:
-                    ingredients_to_buy[ingredient] = 1
-                else:
-                    ingredients_to_buy[ingredient] += 1
-
-        return ingredients_to_buy
+        pass
+        return self.quantities_to_buy
 
     def get_available_dishes(self):
-        available_dishes = set(self.ingredients.keys())
-        for dish, ingredients in self.ingredients.items():
-            for ingredient in ingredients:
-                minimun = self.minimum_inventory[ingredient]
-                if minimun <= self.inventory[ingredient]:
-                    available_dishes.remove(dish)
-                    break
-
-        return available_dishes
+        return self.all_dishes
