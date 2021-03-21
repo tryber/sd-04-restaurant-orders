@@ -23,7 +23,11 @@ class TrackOrders:
         return list(costumer_most_ordered.keys())[0]
 
     def get_order_frequency_per_costumer(self, costumer, order):
-        pass
+        qtd_order = 0
+        for item in self.orders[costumer]:
+            if item[0] == order:
+                qtd_order += 1            
+        return qtd_order
 
     def get_never_ordered_per_costumer(self, costumer):
         costumer_food = set()
