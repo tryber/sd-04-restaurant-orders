@@ -41,8 +41,8 @@ class InventoryControl:
         pratos = set(self.ingredients.keys())
         for prato, ingredients in self.ingredients.items():
             for ingredient in ingredients:
-                min = self.minimum_inventory[ingredient]
-                if min <= self.inventory[ingredient]:
+                min_ingredient = self.minimum_inventory[ingredient]
+                if min_ingredient <= self.inventory[ingredient]:
                     pratos.remove(prato)
-                    return pratos
+                    break
         return pratos
