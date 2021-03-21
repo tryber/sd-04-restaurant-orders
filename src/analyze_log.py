@@ -72,6 +72,6 @@ def analyze_log(path_to_file):
     # print(f"{maria};\n{arnaldo};\n{joaoorders};\n{joaodays};")
 
 
-caminho = "data/orders_1.csv"
-# caminho = "data/orders_2.csv"
-analyze_log(caminho)
+# path = "data/orders_1.csv"
+# path = "data/orders_2.csv"
+# analyze_log(path)
