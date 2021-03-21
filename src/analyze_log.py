@@ -4,12 +4,7 @@ import csv
 
 
 def analyze_log(path_to_file):
-    # caminho csv
-    file = path_to_file
-
-    # if not file.endswith(".csv"):
-    #     raise FileNotFoundError(f"No such file or directory: {file}")
-
+    
     # criando conjuntos por pessoa,
     # por tipo de comida e dia da semana
     # conj_arnaldo = defaultdict(list)
@@ -18,8 +13,11 @@ def analyze_log(path_to_file):
     conj_food = set()
     con_day = set()
 
+    if not path_to_file.endswith(".csv"):
+        raise FileNotFoundError(f"No such file or directory: '{path_to_file}'")
+
     # separando o csv por conjuntos
-    with open(file) as f:
+    with open(path_to_file) as f:
         file_text = csv.reader(f, delimiter=",", quotechar='"')
         for name, food, day in file_text:
             # conjuntos tipo de comida e dia da semana
