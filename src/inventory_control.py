@@ -21,6 +21,21 @@ class InventoryControl:
             'massa': 50,
             'frango': 50,
         }
+        
+    def get_available_dishes(self):
+        pratos = set()
+        for ref in self.ingredients:
+            pratos.add(ref)
+        ingre_disp = set()
+        for ingre in self.minimum_inventory:
+            if self.minimum_inventory[ingre] > 0:
+                ingre_disp.add(ingre)
+        print(ingre_disp, pratos)
+        for prato in self.ingredients:
+            for ingre in self.ingredients[prato]:
+                if not ingre in ingre_disp and prato in pratos:
+                    pratos.remove(prato)
+        return pratos
 
     def add_new_order(self, costumer, order, day):
         self.orders_list.append([costumer, order, day])
@@ -29,9 +44,13 @@ class InventoryControl:
         for ingre in control:
             array.append(ingre)
         counter_ingre = Counter(array)
-        for ingre in counter_ingre:
-            self.minimum_inventory[ingre] = self.minimum_inventory[ingre] - \
-                counter_ingre[ingre]
+        for ing in counter_ingre:
+            if self.minimum_inventory[ing] > 0:
+                self.minimum_inventory[ing] = self.minimum_inventory[ing] - \
+                    counter_ingre[ing]
+            else:
+                return False
+        self.get_available_dishes()
         return True
 
     def get_quantities_to_buy(self):
