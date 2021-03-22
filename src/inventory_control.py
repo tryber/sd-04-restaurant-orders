@@ -27,12 +27,9 @@ class InventoryControl:
             'frango': 0,
         }
 
-        self.orders_list = list()
-
     def add_new_order(self, costumer, order, day):
         if order not in self.get_available_dishes():
             return False
-
         for ingredient in self.ingredients[order]:
             self.inventory[ingredient] += 1
 
@@ -54,4 +51,3 @@ class InventoryControl:
                     if dish in available_dishes:
                         available_dishes.remove(dish)
         return available_dishes
-
