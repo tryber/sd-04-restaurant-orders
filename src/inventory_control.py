@@ -35,12 +35,12 @@ class InventoryControl:
         return True
 
     def get_quantities_to_buy(self):
-        compras=dict()
+        compras = dict()
         for ingre in self.minimum_inventory:
             if ingre == 'queijo':
-                compras[ingre]=100 - \
+                compras[ingre] = 100 - \
                     self.minimum_inventory[ingre]
             else:
-                compras[ingre]=50 - \
+                compras[ingre] = 50 - \
                     self.minimum_inventory[ingre]
         return compras
