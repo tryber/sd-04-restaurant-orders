@@ -14,7 +14,7 @@ def print_info(tracker, control):
 
 def main():
     topic = "order"
-    path = "data/orders_2.csv"
+    path = "data/orders_1.csv"
 
     tracker = TrackOrders()
     control = InventoryControl()
@@ -27,6 +27,7 @@ def main():
         csv_reader = csv.reader(csv_file, delimiter=",")
         for costumer, order, day in csv_reader:
             pub.sendMessage(topic, costumer=costumer, order=order, day=day)
+
     print_info(tracker, control)
 
 
