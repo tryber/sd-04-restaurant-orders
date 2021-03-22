@@ -59,8 +59,6 @@ def import_data(path):
 
 
 def analyze_log(path_to_file):
-    # if not path_to_file.endswith(".csv"):
-    #     raise FileNotFoundError(f"No such file or directory: '{path_to_file}'")
     data = import_data(path_to_file)
     maria = more_request_maria(data)
     arnaldo = quantity_of_arnaldo(data)
