@@ -33,6 +33,12 @@ class InventoryControl:
                 else:
                     ingredients_to_buy[ingredient] += 1
         return ingredients_to_buy
+
+    def get_ingredients_not_available(self):
+        not_available_ingredients = set()
+        for ingredient in self.minimum_inventory:
+            not_available_ingredients.add(ingredient)
+        return not_available_ingredients
     
     def get_available_dishes(self):
         return set(self.ingredients.keys())
