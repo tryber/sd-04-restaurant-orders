@@ -1,4 +1,5 @@
 from src.analyze_log import get_food_most_requested_by_costumer
+from src.analyze_log import get_foods_never_asked
 from src.analyze_log import get_days_never_went
 
 
