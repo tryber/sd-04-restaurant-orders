@@ -16,21 +16,21 @@ def create_log_report(report):
     weekdays = set()
     data = list(report)
     restaurant_log = []
-    for row in data:
-        foods.add(row[1])
-        weekdays.add(row[2])
+    for costumer, order, day in data:
+        foods.add(order)
+        weekdays.add(day)
 
-        if row[0] not in orders:
-            orders[row[0]] = {"weekdays": set(), "foods": {
-                row[1]: 1}, "foodsSet": set()}
+        if costumer not in orders:
+            orders[costumer] = {"weekdays": set(), "foods": {
+                order: 1}, "foodsSet": set()}
 
-        orders[row[0]]["weekdays"].add(row[2])
-        orders[row[0]]["foodsSet"].add(row[1])
+        orders[costumer]["weekdays"].add(day)
+        orders[costumer]["foodsSet"].add(order)
 
-        if row[1] not in orders[row[0]]["foods"]:
-            orders[row[0]]["foods"][row[1]] = 1
+        if order not in orders[costumer]["foods"]:
+            orders[costumer]["foods"][order] = 1
         else:
-            orders[row[0]]["foods"][row[1]] += 1
+            orders[costumer]["foods"][order] += 1
 
     restaurant_log.append(max(orders["maria"]["foods"].items(),
                               key=operator.itemgetter(1))[0])
