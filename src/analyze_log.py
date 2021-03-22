@@ -38,10 +38,12 @@ def more_request_maria(data):
         if order[0] == 'maria':
             lista.append(order[1])
     most = Counter(lista)  # cria um contador
-    biggest_value = max(most.values())  # retorna o VALOR do maior contador
+    biggest_value = max(most.values())
+    # retorna o VALOR do maior contador
     biggest_keys = [key for key, value in most.items() if value ==
                     biggest_value]
-    # faço um for in trazendo chave e valor e retorno o que tem o mesmo valor maximo
+    # faço um for in trazendo chave e valor e
+    # retorno o que tem o mesmo valor maximo
     return biggest_keys[0]
 
 
