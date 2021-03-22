@@ -2,83 +2,78 @@ import csv
 ''' Req 1 '''
 
 
-def favorite_recipe(orders, costumer):
+def favorite_recipe(orders, name):
     '''Qual o prato mais pedido por 'maria'?'''
-    request_favorite = ""
-    list_orders = {}
+    request_favorite = orders[name][0]["product"]
+    count_orders = {}
 
-    for name, order, day in orders:
-        if name == costumer:
-            if order not in list_orders:
-                list_orders[order] = 1
-            else:
-                list_orders[order] += 1
-
-            if (
-                request_favorite not in list_orders
-                or list_orders[order] > list_orders[request_favorite]
-            ):
-                request_favorite = order
+    for order in orders[name]:
+        if order["product"] not in count_orders:
+            count_orders[order["product"]] = 1
+        else:
+            count_orders[order["product"]] += 1
+        if count_orders[order["product"]] > count_orders[request_favorite]:
+            request_favorite = order["product"]
 
     return request_favorite
 
 
-def qty_orders(orders, costumer, recipe):
+def qty_orders(orders, name, item):
     '''Quantas vezes 'arnaldo' pediu 'hamburguer'?'''
     qty = 0
 
-    for name, order, day in orders:
-        if name == costumer and order == recipe:
+    for order in orders[name]:
+        if order["product"] == item:
             qty += 1
 
     return qty
 
 
-def not_orders(orders, costumer):
+def not_orders(orders, name, list_of, term):
     '''Quais pratos 'joao' nunca pediu?'''
-    recipes = set()
     client_recipes = set()
+    recipes = set(list_of)
 
-    for name, order, day in orders:
-        recipes.add(order)
-
-        if name == costumer:
-            client_recipes.add(order)
+    for order in orders[name]:
+        client_recipes.add(order[term])
 
     return recipes.difference(client_recipes)
 
 
-def client_days_off(orders, costumer):
-    ''' Quais dias 'joao' nunca foi na lanchonete?'''
-    days = set()
-    client_visited = set()
-
-    for name, order, day in orders:
-        days.add(day)
-
-        if name == costumer:
-            client_visited.add(day)
-
-    return days.difference(client_visited)
-
-
 def analyze_log(path_to_file):
     ''' leitura do log '''
-    with open(path_to_file, "r") as teste:
-        leitura = csv.reader(teste, delimiter=",")
-        info = [*leitura]
+    orders, products, days = reader_csv(path_to_file)
 
-        favorite_recipe_save = favorite_recipe(info, "maria")
-        qty_orders_save = qty_orders(info, "arnaldo", "hamburguer")
-        not_orders_save = not_orders(info, "joao")
-        client_days_off_save = client_days_off(info, "joao")
+    with open("data/mkt_campaign.txt", mode="w") as file:
+        file.write(f"{favorite_recipe(orders, 'maria')}\n")
+        file.write(f"{qty_orders(orders, 'arnaldo', 'hamburguer')}\n")
+        file.write(f"{not_orders(orders, 'joao', products, 'product')}\n")
+        file.write(f"{not_orders(orders, 'joao', days, 'days_of_week')}")
 
-        with open("data/mkt_campaign.txt", "w") as file:
-            print(
-                favorite_recipe_save,
-                qty_orders_save,
-                not_orders_save,
-                client_days_off_save,
-                sep="\n",
-                file=file,
+
+def organized_list(reader_orders):
+    products = set()
+    days_of_week = set()
+    orders = {}
+
+    for name, item, day in reader_orders:
+        products.add(item)
+        days_of_week.add(day)
+
+        if name not in orders:
+            orders[name] = [
+                {"product": item, "days_of_week": day}
+            ]
+        else:
+            orders[name].append(
+                {"product": item, "days_of_week": day}
             )
+
+    return orders, products, days_of_week
+
+
+def reader_csv(path):
+    with open(path, mode="r") as file:
+        reader_orders = csv.reader(file, delimiter=",", quotechar='"')
+        orders = organized_list(reader_orders)
+    return orders
