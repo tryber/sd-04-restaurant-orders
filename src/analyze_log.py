@@ -66,7 +66,7 @@ def analyze_log(path_to_file):
     joaodays = never_days_joao(data)
 
     txt = open("data/mkt_campaign.txt", 'w')
-    txt.write(f"{maria};\n{arnaldo};\n{joaoorders};\n{joaodays};")
+    txt.write(f"{maria}\n{arnaldo}\n{joaoorders}\n{joaodays}")
     txt.close()
     return True
     # print(f"{maria};\n{arnaldo};\n{joaoorders};\n{joaodays};")
