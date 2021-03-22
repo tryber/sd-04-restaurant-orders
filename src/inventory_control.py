@@ -39,7 +39,7 @@ class InventoryControl:
         ingre_disp = self.ingre_disp()
         for prato in self.ingredients:
             for ingre in self.ingredients[prato]:
-                if not ingre in ingre_disp and prato in pratos:
+                if ingre not in ingre_disp and prato in pratos:
                     pratos.remove(prato)
         return pratos
 
