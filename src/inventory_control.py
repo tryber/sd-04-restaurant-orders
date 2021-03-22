@@ -33,4 +33,6 @@ class InventoryControl:
                 else:
                     ingredients_to_buy[ingredient] += 1
         return ingredients_to_buy
-        
+    
+    def get_available_dishes(self):
+        return set(self.ingredients.keys())
