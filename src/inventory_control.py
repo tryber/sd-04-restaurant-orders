@@ -41,7 +41,7 @@ class InventoryControl:
         for ingredient in self.minimum_inventory:
             not_available_ingredients.add(ingredient)
         return not_available_ingredients
-    
+
     def get_available_dishes(self):
         available_dishes = set(self.ingredients.keys())
         for dish, ingredients in self.ingredients.items():
