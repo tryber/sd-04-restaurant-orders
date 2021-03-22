@@ -2,7 +2,7 @@ import csv
 
 def read_csv(path_to_file):
     if not path_to_file.endswith(".csv"):
-        raise ValueError("Only .csv")
+        raise FileNotFoundError(f"No such file or directory: '{path_to_file}'")
     try:
         with open(path_to_file, encoding="utf-8") as csv_file:
             return list(csv.reader(csv_file))
@@ -58,14 +58,12 @@ def get_days_that_joao_never_goes(orders_list):
 def analyze_log(path_to_file):
     orders = read_csv(path_to_file)
     most_requested_by_maria = get_most_requested_by_maria(orders)
-    arnaldo_buger = get_times_that_arnaldo_asked_for_burger(orders)
+    arnaldo_bugers_asked = get_times_that_arnaldo_asked_for_burger(orders)
     joao_never_asked = get_foods_that_joao_never_asked(orders)
     joao_never_went = get_days_that_joao_never_goes(orders)
-    result = f"""{most_requested_by_maria};
-{arnaldo_buger};
-{joao_never_asked};
-{never_went_days};
-{joao_never_went}
-"""
-    print(result)
-    return result
+
+    with open("data/mkt_campaign.txt", "w") as file:
+        file.write(f"{most_requested_by_maria}\n")
+        file.write(f"{arnaldo_bugers_asked}\n")
+        file.write(f"{joao_never_asked}\n")
+        file.write(f"{joao_never_went}\n")
