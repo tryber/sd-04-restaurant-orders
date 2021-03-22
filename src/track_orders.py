@@ -1,5 +1,6 @@
 from src.analyze_log import get_food_most_requested_by_costumer
-from src.analyze_log import get_times_costumer_asked_food
+from src.analyze_log import get_foods_never_asked
+from src.analyze_log import get_days_never_went
 
 class TrackOrders:
     def __init__(self):
@@ -18,10 +19,10 @@ class TrackOrders:
         pass
 
     def get_never_ordered_per_costumer(self, costumer):
-        pass
+        return get_foods_never_asked(self.orders, costumer)
 
     def get_days_never_visited_per_costumer(self, costumer):
-        pass
+        return get_days_never_went(self.orders, costumer)
 
     def get_busiest_day(self):
         pass

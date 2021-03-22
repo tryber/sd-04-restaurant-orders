@@ -30,26 +30,26 @@ def get_times_costumer_asked_food(orders_list, costumer, food_param):
     return number_of_times
 
 
-def get_foods_that_joao_never_asked(orders_list):
+def get_foods_never_asked(orders_list, costumer):
     never_asked_foods = set()
     asked_foods = set()
     for name, food, day in orders_list:
         if food not in asked_foods:
             never_asked_foods.add(food)
-        if name == 'joao':
+        if name == costumer:
             if food in never_asked_foods:
                 never_asked_foods.remove(food)
             asked_foods.add(food)
     return never_asked_foods
 
 
-def get_days_that_joao_never_goes(orders_list):
+def get_days_never_went(orders_list, costumer):
     never_went_days = set()
     went_days = set()
     for name, food, day in orders_list:
         if day not in went_days:
             never_went_days.add(day)
-        if name == 'joao':
+        if name == costumer:
             if day in never_went_days:
                 never_went_days.remove(day)
             went_days.add(day)
@@ -60,8 +60,8 @@ def analyze_log(path_to_file):
     orders = read_csv(path_to_file)
     maria_food = get_food_most_requested_by_costumer(orders, 'maria')
     arnaldo_bugers_asked = get_times_costumer_asked_food(orders, 'arnaldo', 'hamburguer')
-    joao_never_asked = get_foods_that_joao_never_asked(orders)
-    joao_never_went = get_days_that_joao_never_goes(orders)
+    joao_never_asked = get_foods_never_asked(orders, 'joao')
+    joao_never_went = get_days_never_went(orders, 'joao')
 
     with open("data/mkt_campaign.txt", "w") as file:
         file.write(f"{maria_food}\n")
