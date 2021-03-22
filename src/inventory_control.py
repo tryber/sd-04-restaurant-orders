@@ -21,16 +21,22 @@ class InventoryControl:
             'massa': 50,
             'frango': 50,
         }
-        
-    def get_available_dishes(self):
-        pratos = set()
+    def prato(self):
+        prato = set()
         for ref in self.ingredients:
-            pratos.add(ref)
+            prato.add(ref)
+        return prato
+
+    def ingre_disp(self):
         ingre_disp = set()
         for ingre in self.minimum_inventory:
             if self.minimum_inventory[ingre] > 0:
                 ingre_disp.add(ingre)
-        print(ingre_disp, pratos)
+        return ingre_disp
+
+    def get_available_dishes(self):
+        pratos = self.prato()
+        ingre_disp = self.ingre_disp()
         for prato in self.ingredients:
             for ingre in self.ingredients[prato]:
                 if not ingre in ingre_disp and prato in pratos:
