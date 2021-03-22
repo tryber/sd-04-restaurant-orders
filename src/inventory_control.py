@@ -21,6 +21,7 @@ class InventoryControl:
             'massa': 50,
             'frango': 50,
         }
+
     def prato(self):
         prato = set()
         for ref in self.ingredients:
