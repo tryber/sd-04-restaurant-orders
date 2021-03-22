@@ -36,13 +36,13 @@ class InventoryControl:
             ]
         )
 
-    def remover_pedido(self, ingredient):
+    def remover_prato(self, ingredient):
         for dish in self.ingredients:
             actual_ingredients = set(self.ingredients[dish])
             if ingredient in actual_ingredients:
                 self.all_dishes.discard(dish)
 
-    def adicionar_pedido(self, costumer, order, day):
+    def add_new_order(self, costumer, order, day):
         pass
         elements = self.ingredients[order]
         for ingredient in elements:
@@ -56,7 +56,7 @@ class InventoryControl:
                 < self.minimum_inventory[ingredient]
             ):
                 self.quantities_inventory[ingredient] += 1
-                self.remover_pedido(ingredient)
+                self.remover_prato(ingredient)
             else:
                 return False
 

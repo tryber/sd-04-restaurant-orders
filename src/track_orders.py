@@ -14,13 +14,13 @@ class TrackOrders:
     def get_most_ordered_dish_per_costumer(self, costumer):
         if len(self.orders) == 0:
             return None
-        pedidos_lanche = defaultdict(int)
+        ordered_dish = defaultdict(int)
 
         for order in self.orders:
             if order[0] == costumer:
-                pedidos_lanche[order[1]] += 1
+                ordered_dish[order[1]] += 1
 
-        return max(pedidos_lanche, key=pedidos_lanche.get)
+        return max(ordered_dish, key=ordered_dish.get)
 
     def get_order_frequency_per_costumer(self, costumer, order):
         pass
@@ -43,32 +43,32 @@ class TrackOrders:
         if len(self.orders) == 0:
             return None
 
-        day_clients = set()
-        todos_os_dias = set()
+        visited_days = set()
+        all_days = set()
 
         for order in self.orders:
-            todos_os_dias.add(order[2])
+            all_days.add(order[2])
 
         for order in self.orders:
             if order[0] == costumer:
-                day_clients.add(order[2])
+                visited_days.add(order[2])
 
-        return todos_os_dias.difference(day_clients)
+        return all_days.difference(visited_days)
 
     def get_busiest_day(self):
         if len(self.orders) == 0:
             return None
-        dias = defaultdict(int)
+        days = defaultdict(int)
         for order in self.orders:
-            dias[order[2]] += 1
+            days[order[2]] += 1
 
-        return max(dias, key=dias.get)
+        return max(days, key=days.get)
 
     def get_least_busy_day(self):
         if len(self.orders) == 0:
             return None
-        dias = defaultdict(int)
+        days = defaultdict(int)
         for order in self.orders:
-            dias[order[2]] += 1
+            days[order[2]] += 1
 
-        return min(dias, key=dias.get)
+        return min(days, key=days.get)
