@@ -22,10 +22,10 @@ def get_food_most_requested_by_costumer(orders_list, costumer):
     return max(foods_dict, key=foods_dict.get)
 
 
-def get_times_that_arnaldo_asked_for_burger(orders_list):
+def get_times_costumer_asked_food(orders_list, costumer, food_param):
     number_of_times = 0
     for name, food, day in orders_list:
-        if name == 'arnaldo' and food == 'hamburguer':
+        if name == costumer and food == food_param:
             number_of_times += 1
     return number_of_times
 
@@ -59,7 +59,7 @@ def get_days_that_joao_never_goes(orders_list):
 def analyze_log(path_to_file):
     orders = read_csv(path_to_file)
     maria_food = get_food_most_requested_by_costumer(orders, 'maria')
-    arnaldo_bugers_asked = get_times_that_arnaldo_asked_for_burger(orders)
+    arnaldo_bugers_asked = get_times_costumer_asked_food(orders, 'arnaldo', 'hamburguer')
     joao_never_asked = get_foods_that_joao_never_asked(orders)
     joao_never_went = get_days_that_joao_never_goes(orders)
 
