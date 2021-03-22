@@ -11,10 +11,10 @@ def read_csv(path_to_file):
         return 'File not found'
 
 
-def get_most_requested_by_maria(orders_list):
+def get_most_requested_by_costumer(orders_list, costumer):
     foods_dict = dict()
     for name, food, day in orders_list:
-        if name == 'maria':
+        if name == costumer:
             if food in foods_dict:
                 foods_dict[food] += 1
             else:
@@ -58,7 +58,7 @@ def get_days_that_joao_never_goes(orders_list):
 
 def analyze_log(path_to_file):
     orders = read_csv(path_to_file)
-    most_requested_by_maria = get_most_requested_by_maria(orders)
+    most_requested_by_maria = get_most_requested_by_costumer(orders, 'maria')
     arnaldo_bugers_asked = get_times_that_arnaldo_asked_for_burger(orders)
     joao_never_asked = get_foods_that_joao_never_asked(orders)
     joao_never_went = get_days_that_joao_never_goes(orders)
