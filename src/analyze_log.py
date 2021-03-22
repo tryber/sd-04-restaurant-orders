@@ -59,12 +59,12 @@ def get_days_never_went(orders_list, costumer):
 def analyze_log(path_to_file):
     orders = read_csv(path_to_file)
     maria_food = get_food_most_requested_by_costumer(orders, 'maria')
-    arnaldo_bugers_asked = get_times_costumer_asked_food(orders, 'arnaldo', 'hamburguer')
+    ab = get_times_costumer_asked_food(orders, 'arnaldo', 'hamburguer')
     joao_never_asked = get_foods_never_asked(orders, 'joao')
     joao_never_went = get_days_never_went(orders, 'joao')
 
     with open("data/mkt_campaign.txt", "w") as file:
         file.write(f"{maria_food}\n")
-        file.write(f"{arnaldo_bugers_asked}\n")
+        file.write(f"{ab}\n")
         file.write(f"{joao_never_asked}\n")
         file.write(f"{joao_never_went}\n")
