@@ -24,7 +24,6 @@ class TrackOrders:
         else:
             self.weekdays[day] += 1
 
-
         if day not in self.customer_orders[costumer]["weekdays"]:
             self.customer_orders[costumer]["weekdays"][day] = 1
         else:
