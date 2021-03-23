@@ -1,3 +1,6 @@
+import operator
+
+
 class InventoryControl:
     def __init__(self):
         self.ingredients = {
@@ -32,7 +35,11 @@ class InventoryControl:
     def add_new_order(self, costumer, order, day):
         ingredients = self.ingredients[order]
         for ingredient in ingredients:
+            if self.minimum_inventory[ingredient] == 0:
+                return False
+
             self.minimum_inventory[ingredient] -= 1
+
             if ingredient not in self.buy_list:
                 self.buy_list[ingredient] = 1
             else:
@@ -40,11 +47,19 @@ class InventoryControl:
 
         self.orders.append([costumer, order, day])
 
-        for item in self.minimum_inventory:
-            print(item)
-
     def get_quantities_to_buy(self):
         return self.buy_list
 
-    def get_available_dishes():
-        pass
+    def get_available_dishes(self):
+        avaliable_foods = set()
+        for dishe, ingredients in self.ingredients.items():
+            avaliable = True
+            for item in ingredients:
+                print(self.minimum_inventory[item])
+                if self.minimum_inventory[item] == 0:
+                    avaliable = False
+
+            if avaliable == True:
+                avaliable_foods.add(dishe)
+
+        return avaliable_foods
