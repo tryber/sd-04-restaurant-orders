@@ -32,6 +32,9 @@ class InventoryControl:
     def add_new_order(self, costumer, order, day):
         ingredients = self.ingredients[order]
         for ingredient in ingredients:
+            if self.minimum_inventory[ingredient] == 0:
+                return False
+
             self.minimum_inventory[ingredient] -= 1
             if ingredient not in self.to_buy:
                 self.to_buy[ingredient] = 1
@@ -40,8 +43,19 @@ class InventoryControl:
 
         self.orders.append([costumer, order, day])
 
-        for item in self.minimum_inventory:
-            print(item)
-
     def get_quantities_to_buy(self):
         return self.to_buy
+
+    def get_available_dishes(self):
+        avaiable_dishes = set()
+        for dish, ingredients in self.ingredients.items():
+            avaiable = True
+            for item in ingredients:
+                print(self.minimum_inventory[item])
+                if self.minimum_inventory[item] == 0:
+                    avaiable = False
+
+            if (avaiable):
+                avaiable_dishes.add(dish)
+
+        return avaiable_dishes
