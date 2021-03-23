@@ -1,6 +1,3 @@
-import operator
-
-
 class InventoryControl:
     def __init__(self):
         self.ingredients = {
@@ -59,7 +56,7 @@ class InventoryControl:
                 if self.minimum_inventory[item] == 0:
                     avaliable = False
 
-            if avaliable == True:
+            if avaliable:
                 avaliable_foods.add(dishe)
 
         return avaliable_foods
