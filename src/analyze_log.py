@@ -23,10 +23,10 @@ def freq_ordered(orders, person, product):
     return quantity
 
 
-def never_set(orders, person, items):
+def never_set(orders, person, items, index):
     superset = set()
     for order in orders[person]:
-        superset.add(order["product"])
+        superset.add(order[index])
     never_set = items.difference(superset)
     return never_set
 
@@ -54,9 +54,11 @@ def analyze_log(path_to_file):
                 f"{freq_ordered(orders, 'arnaldo', 'hamburguer')}\n"
             )
 
-            result_file.write(f"{never_set(orders, 'joao', products)}\n")
+            result_file.write(
+                f"{never_set(orders, 'joao', products, 'product')}\n"
+            )
 
-            result_file.write(f"{never_set(orders, 'joao', days)}")
+            result_file.write(f"{never_set(orders, 'joao', days, 'days')}")
 
         result_file.close()
     file.close()
