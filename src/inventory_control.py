@@ -17,7 +17,8 @@ class InventoryControl:
             'frango': 50,
         }
 
-        # self._data = list()
+        self._data = list()
+
         self.ingredients_used = {
             "pao": 0,
             "carne": 0,
@@ -29,13 +30,29 @@ class InventoryControl:
         }
 
     def add_new_order(self, costumer, order, day):
-        ingredients = self.ingredients_used
+        u_ingredients = self.ingredients_used
+
+        if order not in self.get_available_dishes():
+            return False
+
         for item in self.ingredients[order]:
             self.minimum_inventory[item] -= 1
-            ingredients[item] += 1
-        # print(ingredients)
-        # print(self.minimum_inventory)
-        # self._data.append([costumer, order, day])
+            u_ingredients[item] += 1
+
+        self._data.append([costumer, order, day])
 
     def get_quantities_to_buy(self):
         return self.ingredients_used
+
+    def get_available_dishes(self):
+        stock = set()
+        for food, ingredients in self.ingredients.items():
+            available = True
+            for ing in ingredients:
+                if self.minimum_inventory[ing] == 0:
+                    available = False
+
+            if (available):
+                stock.add(food)
+
+        return stock
