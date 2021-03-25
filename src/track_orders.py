@@ -57,4 +57,3 @@ class TrackOrders:
             else:
                 days_visited[day] = 1
         return min(days_visited, key=days_visited.get)
-
