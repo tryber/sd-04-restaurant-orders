@@ -52,8 +52,9 @@ class TrackOrders:
         days_visited = {}
 
         for name, food, day in self.orders:
-            if day is not days_visited:
-                days_visited[day] = 1
-            else:
+            if day in days_visited:
                 days_visited[day] += 1
+            else:
+                days_visited[day] = 1
         return min(days_visited, key=days_visited.get)
+

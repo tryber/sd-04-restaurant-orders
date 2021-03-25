@@ -44,6 +44,6 @@ class InventoryControl:
         dishes = set(self.ingredients.keys())
         for dish, ingredients in self.ingredients.items():
             for item in ingredients:
-                if self.minimum_inventory[item] == 0:
+                if self.minimum_inventory[item] <= 0:
                     dishes.remove(dish)
         return dishes
