@@ -3,16 +3,15 @@ import csv
 
 
 def open_csv_file(file_csv):
-    if not file_csv.endswith(".csv"):
-        raise ValueError("Arquivo com extensão incorreta")
-    else:
+    try:
         with open(file_csv, 'r') as file:
             array_data = list()
             reader = csv.reader(file, delimiter=',')
             for item in reader:
                 array_data.append(item)
-            # print(array_data)
             return array_data
+    except FileExistsError:
+        raise ValueError(f"No such file or directory: '{file_csv}'")
 
 
 def set_obj(value):
@@ -24,7 +23,6 @@ def set_obj(value):
         temp_obj["order"] = item[1]
         temp_obj["day"] = item[2]
         new_array.append(temp_obj)
-    # print(new_array)
     return new_array
 
 
@@ -37,13 +35,25 @@ def count_orders_by_client(order_list, client):
                 ordered[food] = 1
             else:
                 ordered[food] += 1
-    # print(ordered)
     return ordered
 
 
 def most_ordered(obj):
-    loo = max(obj, key=obj.get)
-    return loo
+    order = max(obj, key=obj.get)
+    return order
+
+
+def client_never_did(order_list, client, subj):
+    original = set()
+    modified = set()
+
+    for order in order_list:
+        original.add(order[subj])
+        if (order[0]) == client:
+            modified.add(order[subj])
+
+    diff = original.difference(modified)
+    return diff
 
 
 def analyze_log(path_to_file):
@@ -52,8 +62,15 @@ def analyze_log(path_to_file):
 
     maria_orders = count_orders_by_client(orders, "maria")
     first = most_ordered(maria_orders)
-    print(first)
 
     arnaldo_orders = count_orders_by_client(orders, "arnaldo")
     second = arnaldo_orders['hamburguer']
-    print(second)
+
+    third = client_never_did(itens, "joao", 1)
+    fourth = client_never_did(itens, 'joao', 2)
+
+    with open("data/mkt_campaign.txt", "w") as file:
+        file.write(f"{first}\n")
+        file.write(f"{second}\n")
+        file.write(f"{third}\n")
+        file.write(f"{fourth}\n")
