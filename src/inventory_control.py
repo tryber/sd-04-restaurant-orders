@@ -17,8 +17,34 @@ class InventoryControl:
             'frango': 50,
         }
 
+        self.inventory = {
+            'carne': 0,
+            'pao': 0,
+            'frango': 0,
+            'molho': 0,
+            'massa': 0,
+            'queijo': 0,
+            'presunto': 0,
+        }
+
     def add_new_order(self, costumer, order, day):
-        pass
+        if order not in self.get_available_dishes():
+            print('false')
+            return False
+
+        for ingredient in self.ingredients[order]:
+            self.inventory[ingredient] += 1
 
     def get_quantities_to_buy(self):
-        pass
+        return self.inventory
+
+    def get_available_dishes(self):
+        available_dishes = set(self.ingredients.keys())
+        for dish, ingredients in self.ingredients.items():
+            for ingredient in ingredients:
+                minimun = self.minimum_inventory[ingredient]
+                if minimun <= self.inventory[ingredient]:
+                    available_dishes.remove(dish)
+                    break
+
+        return available_dishes
