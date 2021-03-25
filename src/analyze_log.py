@@ -2,7 +2,6 @@ import csv
 
 
 def get_data_file(path_to_file):
-
     with open(path_to_file) as file:
         file_reader = csv.reader(file)
         data = [*file_reader]
@@ -12,7 +11,6 @@ def get_data_file(path_to_file):
 
 
 def maria_most_ordered(data):
-
     maria_dishes_counter = dict()
 
     for order in data:
@@ -26,7 +24,6 @@ def maria_most_ordered(data):
 
 
 def arnaldo_ordered_burger(data):
-
     arnaldo_burger_counter = 0
 
     for order in data:
@@ -37,7 +34,6 @@ def arnaldo_ordered_burger(data):
 
 
 def joao_never_ordered(data):
-
     all_dishes = set()
     joao_dishes_ordered = set()
 
@@ -53,7 +49,6 @@ def joao_never_ordered(data):
 
 
 def joao_never_went(data):
-
     all_days = set()
     joao_days_went = set()
 
@@ -69,7 +64,6 @@ def joao_never_went(data):
 
 
 def analyze_log(path_to_file):
-
     data = get_data_file(path_to_file)
 
     file_writer = open("data/mkt_campaign.txt", "w")
@@ -79,7 +73,3 @@ def analyze_log(path_to_file):
     file_writer.write(f"{joao_never_went(data)}\n")
 
     file_writer.close()
-
-
-path_to_file = "data/orders_1.csv"
-analyze_log(path_to_file)
