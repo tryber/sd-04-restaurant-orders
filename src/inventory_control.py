@@ -1,6 +1,7 @@
 from src.analyze_log import favorite_recipe
 from src.analyze_log import qty_orders
 from src.analyze_log import not_orders
+from src.analyze_log import get_days_client_gone
 
 
 class TrackOrders:

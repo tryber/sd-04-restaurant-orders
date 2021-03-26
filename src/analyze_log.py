@@ -52,7 +52,6 @@ def get_days_client_gone(data, client):
 
 
 def analyze_log(path_to_file):
-    
     with open(path_to_file, "r") as file:
         content = csv.reader(file, delimiter=",")
         data = [*content]
