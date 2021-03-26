@@ -1,18 +1,45 @@
 class TrackOrders:
+
+    def __init__(self):
+        self.orders = []
+
+
     def __len__(self):
-        pass
+        return len(self.orders)
 
     def add_new_order(self, costumer, order, day):
-        pass
+        self.orders.append([costumer, order, day])
 
     def get_most_ordered_dish_per_costumer(self, costumer):
-        pass
+        request = []
+        bigger = set()
+        for line in self.orders:
+            if line[0] == costumer:
+                request.append(line[1])
+        for pedido in request:
+            bigger.add((request.count(pedido), pedido))
+            great_bigger = dict(bigger)
+        return great_bigger[max(great_bigger)]
+
 
     def get_order_frequency_per_costumer(self, costumer, order):
-        pass
+        requested = []
+        for line in self.orders:
+            if line[0] == costumer:
+                requested.append(line[1])
+        return requested.count(order)
+
 
     def get_never_ordered_per_costumer(self, costumer):
-        pass
+        requested = set()
+        request_user = set()
+        for line in self.orders:
+            if line[0] == costumer:
+                request_user.add(line[1])
+            else:
+                requested.add(line[1])
+        return requested - request_user
+
 
     def get_days_never_visited_per_costumer(self, costumer):
         pass
