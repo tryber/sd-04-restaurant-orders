@@ -1,7 +1,5 @@
 import csv
 
-
-
 def most_requested(data):
     request = []
     bigger = set()
@@ -19,8 +17,6 @@ def how_mutch(data):
         if line[0] == 'arnaldo':
             request.append(line[1])
     return request.count('hamburguer')
-
-
 
 def never_eat(data):
     requested = set()
@@ -42,7 +38,6 @@ def never_comeback(data):
             days.add(line[2])
     return days - days_user
 
-
 def import_data(path):
     try:
         result = []
@@ -54,7 +49,6 @@ def import_data(path):
             return result
     except FileNotFoundError:
         raise FileNotFoundError(f"No such file or directory: '{path}'")
-
 
 def analyze_log(path_to_file):
     if not path_to_file.endswith(".csv"):
