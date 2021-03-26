@@ -29,7 +29,7 @@ class InventoryControl:
 
 
     def get_quantities_to_buy(self):
-         return dict([
+        return dict([
             (ingredient, self.minimum_inventory[ingredient]
                 - self.inventory[ingredient])
 
@@ -49,4 +49,3 @@ class InventoryControl:
                 return False
 
         return True
-        
