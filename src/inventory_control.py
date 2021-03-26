@@ -46,7 +46,7 @@ class TrackOrders:
         frequency = list(self.orders_per_day.keys())[0]
 
         for day in self.orders_per_day:
-            if self.orders_per_day[day] > self.orders_per_day[frequencia]:
+            if self.orders_per_day[day] > self.orders_per_day[frequency]:
                 frequency = day
 
         return frequency
@@ -55,7 +55,7 @@ class TrackOrders:
         frequency = list(self.orders_per_day.keys())[0]
 
         for day in self.orders_per_day:
-            if self.orders_per_day[day] < self.orders_per_day[frequencia]:
+            if self.orders_per_day[day] < self.orders_per_day[frequency]:
                 frequency = day
 
         return frequency
