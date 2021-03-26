@@ -30,7 +30,7 @@ class InventoryControl:
 
     def add_new_order(self, costumer, order, day):
         self.orders.append([costumer, order, day])
-        if order not in self.get_available_food():
+        if order not in self.get_available_dishes():
             return False
 
         for i in self.ingredients[order]:
@@ -39,7 +39,7 @@ class InventoryControl:
     def get_quantities_to_buy(self):
         return self.inventory
 
-    def get_available_food(self):
+    def get_available_dishes(self):
         available_food = list(self.ingredients.keys())
         for food, i in self.ingredients.items():
             for ing in i:
