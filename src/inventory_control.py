@@ -59,3 +59,6 @@ class TrackOrders:
                 frequency = day
 
         return frequency
+
+    def get_days_never_visited_per_costumer(self, costumer):
+        return get_days_client_gone(self.orders, costumer)
