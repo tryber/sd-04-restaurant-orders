@@ -13,14 +13,12 @@ def most_requested(data):
     return great_bigger[max(great_bigger)]
 
 
-
 def how_mutch(data):
     request = []
     for line in data:
         if line[0] == 'arnaldo':
             request.append(line[1])
     return request.count('hamburguer')
-
 
 
 def never_eat(data):
