@@ -6,14 +6,10 @@ from src.analyze_log import get_days_client_gone
 
 class TrackOrders:
     def __init__(self):
-        self.orders = {}
-        self.products = set()
-        self.days_of_week = set()
-        self.orders_per_day = {}
-        self.lenght = 0
+        self.orders = []
 
     def __len__(self):
-        return self.lenght
+        return len(self.orders)
 
     def add_new_order(self, costumer, order, day):
         if costumer not in self.orders:
