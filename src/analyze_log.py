@@ -1,5 +1,6 @@
 import csv
 
+
 def most_requested(data):
     request = []
     bigger = set()
@@ -11,12 +12,16 @@ def most_requested(data):
         great_bigger = dict(bigger)
     return great_bigger[max(great_bigger)]
 
+
+
 def how_mutch(data):
     request = []
     for line in data:
         if line[0] == 'arnaldo':
             request.append(line[1])
     return request.count('hamburguer')
+
+
 
 def never_eat(data):
     requested = set()
@@ -28,6 +33,7 @@ def never_eat(data):
             requested.add(line[1])
     return requested - request_user
 
+
 def never_comeback(data):
     days = set()
     days_user = set()
@@ -37,6 +43,7 @@ def never_comeback(data):
         else:
             days.add(line[2])
     return days - days_user
+
 
 def import_data(path):
     try:
@@ -50,9 +57,10 @@ def import_data(path):
     except FileNotFoundError:
         raise FileNotFoundError(f"No such file or directory: '{path}'")
 
+
 def analyze_log(path_to_file):
     if not path_to_file.endswith(".csv"):
-            raise FileNotFoundError(f"No such file or directory: '{path_to_file}'")
+        raise FileNotFoundError(f"No such file or directory: '{path_to_file}'")
 
     data = import_data(path_to_file)
     data_maria = most_requested(data)
