@@ -57,8 +57,8 @@ class TrackOrders:
         bigger = set()
         for line in self.orders:
             request.append(line[2])
-        for request in request:
-            bigger.add((request.count(request), request))
+        for requested in request:
+            bigger.add((request.count(requested), requested))
             great_bigger = dict(bigger)
         return great_bigger[max(great_bigger)]
 
@@ -68,8 +68,8 @@ class TrackOrders:
         bigger = set()
         for line in self.orders:
             request.append(line[2])
-        for request in request:
-            bigger.add((request.count(request), request))
+        for requested in request:
+            bigger.add((request.count(requested), requested))
             great_bigger = dict(bigger)
         return great_bigger[min(great_bigger)]
         
