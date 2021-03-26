@@ -21,7 +21,7 @@ def analyze_log(path_to_file):
                 arnaldo_burguer += 1
             if row["cliente"] == "maria":
                 maria_food.append(row["pedido"])
-            if row["nome"] == "joao":
+            if row["cliente"] == "joao":
                 joao_food.add(row["pedido"])
                 joao_day.add(row["dia"])
 
@@ -36,5 +36,3 @@ def analyze_log(path_to_file):
             f"{joao_not_order}\n"
             f"{not_order_day_joao}\n"
         )
-
-    raise NotImplementedError
