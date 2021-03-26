@@ -1,7 +1,8 @@
-from src.analyze_log import favorite_recipe
-from src.analyze_log import qty_orders
-from src.analyze_log import not_orders
+from src.analyze_log import get_favorite_orders
+from src.analyze_log import order_times_ordered
+from src.analyze_log import get_not_ordered
 from src.analyze_log import get_days_client_gone
+import operator
 
 
 class TrackOrders:
@@ -12,50 +13,38 @@ class TrackOrders:
         return len(self.orders)
 
     def add_new_order(self, costumer, order, day):
-        if costumer not in self.orders:
-            self.orders[costumer] = [
-                {"product": order, "days_of_week": day}
-            ]
-        else:
-            self.orders[costumer].append(
-                {"product": order, "days_of_week": day}
-            )
-
-        self.lenght += 1
-        self.products.add(order)
-
-        if day not in self.orders_per_day:
-            self.orders_per_day[day] = 1
-        else:
-            self.orders_per_day[day] += 1
-        self.days_of_week.add(day)
+        self.orders.append([costumer, order, day])
 
     def get_most_ordered_dish_per_costumer(self, costumer):
-        return favorite_recipe(self.orders, costumer)
+        return get_favorite_orders(self.orders, costumer)
 
-    def get_dish_quantity_per_costumer(self, costumer, order):
-        return qty_orders(self.orders, costumer, order)
+    def get_order_frequency_per_costumer(self, costumer, order):
+        return order_times_ordered(self.orders, costumer, order)
 
     def get_never_ordered_per_costumer(self, costumer):
-        return not_orders(self.orders, costumer, self.products, "product")
-
-    def get_busiest_day(self):
-        frequency = list(self.orders_per_day.keys())[0]
-
-        for day in self.orders_per_day:
-            if self.orders_per_day[day] > self.orders_per_day[frequency]:
-                frequency = day
-
-        return frequency
-
-    def get_least_busy_day(self):
-        frequency = list(self.orders_per_day.keys())[0]
-
-        for day in self.orders_per_day:
-            if self.orders_per_day[day] < self.orders_per_day[frequency]:
-                frequency = day
-
-        return frequency
+        return get_not_ordered(self.orders, costumer)
 
     def get_days_never_visited_per_costumer(self, costumer):
         return get_days_client_gone(self.orders, costumer)
+
+    def get_busiest_day(self):
+        visited_days = {}
+
+        for name, food, day in self.orders:
+            if day not in visited_days:
+                visited_days[day] = 1
+            else:
+                visited_days[day] += 1
+
+        return max(visited_days.items(), key=operator.itemgetter(1))[0]
+
+    def get_least_busy_day(self):
+        visited_days = {}
+
+        for name, food, day in self.orders:
+            if day not in visited_days:
+                visited_days[day] = 1
+            else:
+                visited_days[day] += 1
+
+        return min(visited_days.items(), key=operator.itemgetter(1))[0]
