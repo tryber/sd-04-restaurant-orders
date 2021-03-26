@@ -70,3 +70,4 @@ def analyze_log(path_to_file):
     txt.write(f"{data_maria}\n{data_arnaldo}\n{data_jmenu}\n{data_jdias}")
     txt.close()
     return True
+    
