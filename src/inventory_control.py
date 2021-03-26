@@ -1,6 +1,5 @@
 class InventoryControl:
 
-
     def __init__(self):
         self.ingredients = {
             'hamburguer': ['pao', 'carne', 'queijo'],
@@ -21,7 +20,6 @@ class InventoryControl:
 
         self.inventory = self.minimum_inventory.copy()
 
-
     def add_new_order(self, costumer, order, day):
         for ingredient in self.ingredients[order]:
             if self.inventory[ingredient] == 0:
@@ -29,21 +27,18 @@ class InventoryControl:
 
             self.inventory[ingredient] -= 1
 
-
     def get_quantities_to_buy(self):
         return dict([
             (ingredient, self.minimum_inventory[ingredient]
-            -self.inventory[ingredient])
+                - self.inventory[ingredient])
 
             for ingredient in self.minimum_inventory
         ])
-
 
     def get_available_dishes(self):
         return {
             dish for dish in self.ingredients if self.is_dish_avaible(dish)
         }
-
 
     def is_dish_avaible(self, dish):
         for ingredient in self.ingredients[dish]:
