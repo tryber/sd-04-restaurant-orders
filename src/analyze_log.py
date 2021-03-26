@@ -2,7 +2,7 @@ import csv
 
 
 def most_ordered_by_client(orders, name):
-    count =  {}
+    count = {}
     request_favorite = orders[name][0]["product"]
 
     for order in orders[name]:
