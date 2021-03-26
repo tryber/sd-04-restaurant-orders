@@ -66,4 +66,3 @@ def analyze_log(path_to_file):
             )
         analyze_file.write(f"{get_not_ordered(data, 'joao')}\n")
         analyze_file.write(f"{get_days_client_gone(data, 'joao')}\n")
-
