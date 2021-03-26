@@ -20,16 +20,48 @@ class TrackOrders:
         return maior2[max(maior2)]
 
     def get_order_frequency_per_costumer(self, costumer, order):
-        pass
+        pedidos = []
+        for line in self.orders:
+            if line[0] == costumer:
+                pedidos.append(line[1])
+        return pedidos.count(order)
 
     def get_never_ordered_per_costumer(self, costumer):
-        pass
+        pedidos = set()
+        pedidos_cliente = set()
+        for line in self.orders:
+            if line[0] == costumer:
+                pedidos_cliente.add(line[1])
+            else:
+                pedidos.add(line[1])
+        return pedidos - pedidos_cliente
 
     def get_days_never_visited_per_costumer(self, costumer):
-        pass
+        dias = set()
+        dias_cliente = set()
+        for line in self.orders:
+            if line[0] == costumer:
+                dias_cliente.add(line[2])
+            else:
+                dias.add(line[2])
+        return dias - dias_cliente
 
     def get_busiest_day(self):
-        pass
+        pedidos = []
+        maior = set()
+        for line in self.orders:
+            pedidos.append(line[2])
+        for pedido in pedidos:
+            maior.add((pedidos.count(pedido), pedido))
+            maior2 = dict(maior)
+        return maior2[max(maior2)]
 
     def get_least_busy_day(self):
-        pass
+        pedidos = []
+        maior = set()
+        for line in self.orders:
+            pedidos.append(line[2])
+        for pedido in pedidos:
+            maior.add((pedidos.count(pedido), pedido))
+            maior2 = dict(maior)
+        return maior2[min(maior2)]
