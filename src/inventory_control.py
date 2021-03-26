@@ -58,3 +58,8 @@ class InventoryControl:
             else:
                 return False
 
+    def get_quantities_to_buy(self):
+        return self.quantities_to_buy
+
+    def get_available_dishes(self):
+        return self.all_recipes
