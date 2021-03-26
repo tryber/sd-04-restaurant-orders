@@ -42,10 +42,34 @@ class TrackOrders:
 
 
     def get_days_never_visited_per_costumer(self, costumer):
-        pass
+        days = set()
+        days_user = set()
+        for line in self.orders:
+            if line[0] == costumer:
+                days_user.add(line[2])
+            else:
+                days.add(line[2])
+        return days - days_user
+
 
     def get_busiest_day(self):
-        pass
+        request = []
+        bigger = set()
+        for line in self.orders:
+            request.append(line[2])
+        for request in request:
+            bigger.add((request.count(request), request))
+            great_bigger = dict(bigger)
+        return great_bigger[max(great_bigger)]
+
 
     def get_least_busy_day(self):
-        pass
+        request = []
+        bigger = set()
+        for line in self.orders:
+            request.append(line[2])
+        for request in request:
+            bigger.add((request.count(request), request))
+            great_bigger = dict(bigger)
+        return great_bigger[min(great_bigger)]
+        
