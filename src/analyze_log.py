@@ -14,8 +14,8 @@ def analyze_log(path_to_file):
 
 
 def person_favorite_food(person_name, datasource):
-    person_foods_list = [data['food'] 
-        for data in datasource if data['name'] == person_name]
+    person_foods_list = [data['food']
+                         for data in datasource if data['name'] == person_name]
     favorite_food = max(person_foods_list, key=person_foods_list.count)
 
     return favorite_food
